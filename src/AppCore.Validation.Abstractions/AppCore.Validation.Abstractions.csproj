@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net452;netstandard1.0;netstandard2.0</TargetFrameworks>
+    <RootNamespace>AppCore.Validation</RootNamespace>
+    <Description>AppCore validation framework abstractions</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AppCore.Diagnostics.Sources" Version="$(AppCore_Shared_Version)">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="AppCore.DependencyInjection.Abstractions" Version="$(AppCore_DI_Version)" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AppCore.DependencyInjection.Microsoft.Extensions" Version="$(AppCore_DI_Version)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AppCore.Validation.DataAnnotations\AppCore.Validation.DataAnnotations.csproj" />
+  </ItemGroup>
+
+</Project>
