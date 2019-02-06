@@ -10,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net452'">
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Threading.Tasks" />  
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
 
