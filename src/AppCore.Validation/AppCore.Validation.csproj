@@ -19,4 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\AppCore.Validation.Abstractions\AppCore.Validation.Abstractions.csproj" />
   </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net452'">
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Threading.Tasks" />
+  </ItemGroup>
+
 </Project>
