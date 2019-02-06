@@ -13,5 +13,9 @@
     <PackageReference Include="AppCore.DependencyInjection.Abstractions" Version="$(AppCore_DI_Version)" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.0" />
   </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)'=='net452'">
+    <Reference Include="System.Runtime" />
+  </ItemGroup>
 
 </Project>
