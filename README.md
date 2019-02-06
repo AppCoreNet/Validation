@@ -1,7 +1,7 @@
 Validation
 ----------
 
-[![Build status](https://ci.appveyor.com/api/projects/status/gj231hvwaan835o5/branch/dev?svg=true)](https://ci.appveyor.com/project/AppCoreNet/logging/branch/dev)
+[![Build status](https://ci.appveyor.com/api/projects/status/ql93uurcdrg0mmr5/branch/dev?svg=true)](https://ci.appveyor.com/project/AppCoreNet/validation/branch/dev)
 
 This repository includes projects containing abstractions and implementations for validating objects.
 
