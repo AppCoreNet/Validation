@@ -1,17 +1,15 @@
 ﻿// Licensed under the MIT License.
 // Copyright (c) 2018 the AppCore .NET project.
 
+using AppCore.DependencyInjection;
 using AppCore.DependencyInjection.Facilities;
-using AppCore.Validation;
-using IValidatorFactory = FluentValidation.IValidatorFactory;
 
-// ReSharper disable once CheckNamespace
-namespace AppCore.DependencyInjection
+namespace AppCore.Validation.FluentValidation
 {
     /// <summary>
     /// Provides a extensions for the <see cref="IValidationFacility"/> which adds validation using FluentValidation.
     /// </summary>
-    public sealed class FluentValidationFacilityExtension : FacilityExtension<IValidationFacility>
+    public sealed class FluentValidationExtension : FacilityExtension<IValidationFacility>
     {
         /// <inheritdoc />
         protected override void RegisterComponents(IComponentRegistry registry, IValidationFacility facility)
@@ -21,7 +19,7 @@ namespace AppCore.DependencyInjection
                     .PerDependency()
                     .IfNotRegistered();
 
-            registry.Register<IValidatorFactory>()
+            registry.Register<global::FluentValidation.IValidatorFactory>()
                     .Add<ContainerValidatorFactory>()
                     .PerDependency()
                     .IfNoneRegistered();

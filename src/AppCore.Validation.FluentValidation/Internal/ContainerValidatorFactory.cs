@@ -5,7 +5,7 @@ using System;
 using AppCore.DependencyInjection;
 using FluentValidation;
 
-namespace AppCore.Validation
+namespace AppCore.Validation.FluentValidation
 {
     internal sealed class ContainerValidatorFactory : ValidatorFactoryBase
     {
@@ -16,9 +16,9 @@ namespace AppCore.Validation
             _container = container;
         }
 
-        public override FluentValidation.IValidator CreateInstance(Type validatorType)
+        public override global::FluentValidation.IValidator CreateInstance(Type validatorType)
         {
-            return _container.ResolveOptional(validatorType) as FluentValidation.IValidator;
+            return _container.ResolveOptional(validatorType) as global::FluentValidation.IValidator;
         }
     }
 }
