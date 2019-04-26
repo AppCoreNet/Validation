@@ -9,20 +9,20 @@ using AppCore.Diagnostics;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace AppCore.Validation
+namespace AppCore.Validation.FluentValidation
 {
     /// <summary>
     /// Provides a <see cref="IValidator"/> which uses FluentValidation.
     /// </summary>
     public sealed class FluentValidationValidator : IValidator
     {
-        private readonly FluentValidation.IValidator _validator;
+        private readonly global::FluentValidation.IValidator _validator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FluentValidationValidator"/>.
         /// </summary>
-        /// <param name="validator">The <see cref="FluentValidation.IValidator"/>.</param>
-        public FluentValidationValidator(FluentValidation.IValidator validator)
+        /// <param name="validator">The <see cref="T:global::FluentValidation.IValidator"/>.</param>
+        public FluentValidationValidator(global::FluentValidation.IValidator validator)
         {
             Ensure.Arg.NotNull(validator, nameof(validator));
             _validator = validator;
@@ -31,7 +31,7 @@ namespace AppCore.Validation
         /// <inheritdoc />
         public async ValueTask<ValidationResult> ValidateAsync(object model, CancellationToken cancellationToken)
         {
-            FluentValidation.Results.ValidationResult result = await _validator.ValidateAsync(model, cancellationToken);
+            global::FluentValidation.Results.ValidationResult result = await _validator.ValidateAsync(model, cancellationToken);
             if (!result.IsValid)
             {
                 return new ValidationResult(result.Errors.Select(CreateValidationError));
