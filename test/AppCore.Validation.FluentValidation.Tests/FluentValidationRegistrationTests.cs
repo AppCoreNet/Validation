@@ -1,9 +1,10 @@
 ﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Copyright (c) 2018,2019 the AppCore .NET project.
 
 using AppCore.DependencyInjection;
 using FluentAssertions;
 using Xunit;
+using FV = FluentValidation;
 
 namespace AppCore.Validation.FluentValidation
 {
@@ -22,6 +23,7 @@ namespace AppCore.Validation.FluentValidation
                     .Contain(
                         cr =>
                             cr.ContractType == typeof(IValidatorProvider)
+                            && cr.ImplementationType == typeof(FluentValidationValidatorProvider)
                             && cr.Lifetime == ComponentLifetime.Transient
                             && cr.Flags == ComponentRegistrationFlags.IfNotRegistered);
         }
@@ -32,14 +34,15 @@ namespace AppCore.Validation.FluentValidation
             var registry = new TestComponentRegistry();
 
             registry.RegisterFacility<ValidationFacility>()
-                    .AddFluentValidation()
-                    .AddValidators(r => r.Add<TestModelValidator>());
+                    .AddFluentValidation(
+                        fv => fv.UseValidators(
+                            r => r.Add<TestModelValidator>()));
 
             registry.GetRegistrations()
                     .Should()
                     .Contain(
                         cr =>
-                            cr.ContractType == typeof(IValidator<>)
+                            cr.ContractType == typeof(FV.IValidator)
                             && cr.Lifetime == ComponentLifetime.Transient);
         }
     }

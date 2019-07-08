@@ -22,6 +22,7 @@ namespace AppCore.Validation.DataAnnotations
                     .Contain(
                         cr =>
                             cr.ContractType == typeof(IValidatorProvider)
+                            && cr.ImplementationType == typeof(DataAnnotationsValidatorProvider)
                             && cr.Lifetime == ComponentLifetime.Transient
                             && cr.Flags == ComponentRegistrationFlags.IfNotRegistered);
         }

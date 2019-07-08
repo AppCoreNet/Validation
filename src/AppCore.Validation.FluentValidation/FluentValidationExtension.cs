@@ -1,8 +1,12 @@
 ﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Copyright (c) 2018,2019 the AppCore .NET project.
 
+using System;
+using System.Collections.Generic;
 using AppCore.DependencyInjection;
+using AppCore.DependencyInjection.Builder;
 using AppCore.DependencyInjection.Facilities;
+using FV = FluentValidation;
 
 namespace AppCore.Validation.FluentValidation
 {
@@ -11,6 +15,9 @@ namespace AppCore.Validation.FluentValidation
     /// </summary>
     public sealed class FluentValidationExtension : FacilityExtension<IValidationFacility>
     {
+        private readonly List<Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility>> _registrationActions =
+            new List<Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility>>();
+
         /// <inheritdoc />
         protected override void RegisterComponents(IComponentRegistry registry, IValidationFacility facility)
         {
@@ -19,10 +26,21 @@ namespace AppCore.Validation.FluentValidation
                     .PerDependency()
                     .IfNotRegistered();
 
-            registry.Register<global::FluentValidation.IValidatorFactory>()
+            registry.Register<FV.IValidatorFactory>()
                     .Add<ContainerValidatorFactory>()
                     .PerDependency()
                     .IfNoneRegistered();
+
+            IRegistrationBuilder<FV.IValidator> validatorRegistrationBuilder = registry.Register<FV.IValidator>();
+            foreach (Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility> registrationAction in _registrationActions)
+            {
+                registrationAction(validatorRegistrationBuilder, facility);
+            }
+        }
+
+        public void RegisterValidators(Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility> registrationBuilder)
+        {
+            _registrationActions.Add(registrationBuilder);
         }
     }
 }
