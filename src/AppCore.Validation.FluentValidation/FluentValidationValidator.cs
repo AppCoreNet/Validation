@@ -1,5 +1,5 @@
 ﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Copyright (c) 2018,2019 the AppCore .NET project.
 
 using System;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AppCore.Diagnostics;
 using FluentValidation;
 using FluentValidation.Results;
+using FV = FluentValidation;
 
 namespace AppCore.Validation.FluentValidation
 {
@@ -16,13 +17,13 @@ namespace AppCore.Validation.FluentValidation
     /// </summary>
     public sealed class FluentValidationValidator : IValidator
     {
-        private readonly global::FluentValidation.IValidator _validator;
+        private readonly FV.IValidator _validator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FluentValidationValidator"/>.
         /// </summary>
         /// <param name="validator">The <see cref="T:global::FluentValidation.IValidator"/>.</param>
-        public FluentValidationValidator(global::FluentValidation.IValidator validator)
+        public FluentValidationValidator(FV.IValidator validator)
         {
             Ensure.Arg.NotNull(validator, nameof(validator));
             _validator = validator;
@@ -31,7 +32,7 @@ namespace AppCore.Validation.FluentValidation
         /// <inheritdoc />
         public async ValueTask<ValidationResult> ValidateAsync(object model, CancellationToken cancellationToken)
         {
-            global::FluentValidation.Results.ValidationResult result = await _validator.ValidateAsync(model, cancellationToken);
+            FV.Results.ValidationResult result = await _validator.ValidateAsync(model, cancellationToken);
             if (!result.IsValid)
             {
                 return new ValidationResult(result.Errors.Select(CreateValidationError));

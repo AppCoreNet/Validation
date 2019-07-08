@@ -1,9 +1,10 @@
 ﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Copyright (c) 2018,2019 the AppCore .NET project.
 
 using System;
 using AppCore.DependencyInjection;
 using FluentValidation;
+using FV = FluentValidation;
 
 namespace AppCore.Validation.FluentValidation
 {
@@ -16,9 +17,9 @@ namespace AppCore.Validation.FluentValidation
             _container = container;
         }
 
-        public override global::FluentValidation.IValidator CreateInstance(Type validatorType)
+        public override FV.IValidator CreateInstance(Type validatorType)
         {
-            return _container.ResolveOptional(validatorType) as global::FluentValidation.IValidator;
+            return _container.ResolveOptional(validatorType) as FV.IValidator;
         }
     }
 }

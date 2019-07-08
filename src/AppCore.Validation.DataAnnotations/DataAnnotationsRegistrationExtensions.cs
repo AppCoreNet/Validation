@@ -1,5 +1,5 @@
 ﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Copyright (c) 2018,2019 the AppCore .NET project.
 
 using AppCore.DependencyInjection.Facilities;
 using AppCore.Diagnostics;
@@ -18,8 +18,8 @@ namespace AppCore.DependencyInjection
         /// Adds capability to use the <see cref="System.ComponentModel.DataAnnotations"/> to validate models.
         /// </summary>
         /// <param name="builder">The <see cref="IFacilityBuilder{TFacility}"/>.</param>
-        /// <returns>The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</returns>
-        public static IFacilityExtensionBuilder<IValidationFacility, DataAnnotationsExtension> AddDataAnnotations(
+        /// <returns>The <see cref="IFacilityBuilder{TFacility}"/>.</returns>
+        public static IFacilityBuilder<IValidationFacility> AddDataAnnotations(
             this IFacilityBuilder<IValidationFacility> builder)
         {
             Ensure.Arg.NotNull(builder, nameof(builder));
