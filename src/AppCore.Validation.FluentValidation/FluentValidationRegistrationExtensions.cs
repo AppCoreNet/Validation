@@ -29,7 +29,7 @@ namespace AppCore.DependencyInjection
                 Action<IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension>> configure = null)
         {
             Ensure.Arg.NotNull(builder, nameof(builder));
-            return builder.AddExtension(configure);
+            return builder.Add(configure);
         }
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace AppCore.DependencyInjection
         {
             Ensure.Arg.NotNull(builder, nameof(builder));
             Ensure.Arg.NotNull(register, nameof(register));
-
-            builder.Extension.RegisterValidators(register);
+            
+            builder.Configure((f,e) => e.RegisterValidators(register));
             return builder;
         }
 
