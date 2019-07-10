@@ -7,7 +7,6 @@ using AppCore.DependencyInjection.Facilities;
 using AppCore.Diagnostics;
 using AppCore.Validation;
 using AppCore.Validation.FluentValidation;
-using IValidator = FluentValidation.IValidator;
 
 // ReSharper disable once CheckNamespace
 namespace AppCore.DependencyInjection
@@ -38,14 +37,14 @@ namespace AppCore.DependencyInjection
         /// <param name="builder">The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</param>
         /// <param name="register">The validator registration action.</param>
         /// <returns>The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</returns>
-        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> UseValidators(
+        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> AddValidators(
             this IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> builder,
-            Action<IRegistrationBuilder<IValidator>, IValidationFacility> register)
+            Action<IRegistrationBuilder, IValidationFacility> register)
         {
             Ensure.Arg.NotNull(builder, nameof(builder));
             Ensure.Arg.NotNull(register, nameof(register));
             
-            builder.Configure((f,e) => e.RegisterValidators(register));
+            builder.Configure((f,e) => e.AddValidators(register));
             return builder;
         }
 
@@ -55,11 +54,11 @@ namespace AppCore.DependencyInjection
         /// <param name="builder">The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</param>
         /// <param name="register">The validator registration action.</param>
         /// <returns>The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</returns>
-        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> UseValidators(
+        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> AddValidators(
             this IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> builder,
-            Action<IRegistrationBuilder<IValidator>> register)
+            Action<IRegistrationBuilder> register)
         {
-            return builder.UseValidators((r, _) => register(r));
+            return builder.AddValidators((r, _) => register(r));
         }
     }
 }

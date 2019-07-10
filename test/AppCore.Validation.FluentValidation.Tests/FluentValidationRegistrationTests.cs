@@ -29,20 +29,20 @@ namespace AppCore.Validation.FluentValidation
         }
 
         [Fact]
-        public void UseValidatorsRegistersValidator()
+        public void AddValidatorsRegistersValidator()
         {
             var registry = new TestComponentRegistry();
 
             registry.RegisterFacility<ValidationFacility>()
                     .AddFluentValidation(
-                        fv => fv.UseValidators(
+                        fv => fv.AddValidators(
                             r => r.Add<TestModelValidator>()));
 
             registry.GetRegistrations()
                     .Should()
                     .Contain(
                         cr =>
-                            cr.ContractType == typeof(FV.IValidator)
+                            cr.ContractType == typeof(FV.IValidator<>)
                             && cr.Lifetime == ComponentLifetime.Transient);
         }
     }
