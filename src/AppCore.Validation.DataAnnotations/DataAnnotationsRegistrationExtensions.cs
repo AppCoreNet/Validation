@@ -23,7 +23,7 @@ namespace AppCore.DependencyInjection
             this IFacilityBuilder<IValidationFacility> builder)
         {
             Ensure.Arg.NotNull(builder, nameof(builder));
-            return builder.AddExtension<DataAnnotationsExtension>();
+            return builder.Add<DataAnnotationsExtension>();
         }
     }
 }
