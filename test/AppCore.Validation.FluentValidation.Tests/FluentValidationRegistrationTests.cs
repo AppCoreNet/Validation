@@ -35,7 +35,7 @@ namespace AppCore.Validation.FluentValidation
 
             registry.RegisterFacility<ValidationFacility>()
                     .AddFluentValidation(
-                        fv => fv.UseValidators(
+                        fv => fv.AddValidators(
                             r => r.Add<TestModelValidator>()));
 
             registry.GetRegistrations()

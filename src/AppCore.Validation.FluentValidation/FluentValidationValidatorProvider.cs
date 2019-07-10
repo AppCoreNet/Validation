@@ -1,8 +1,9 @@
 ﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Copyright (c) 2018,2019 the AppCore .NET project.
 
 using System;
 using AppCore.Diagnostics;
+using FV = FluentValidation;
 
 namespace AppCore.Validation.FluentValidation
 {
@@ -11,13 +12,13 @@ namespace AppCore.Validation.FluentValidation
     /// </summary>
     public sealed class FluentValidationValidatorProvider : IValidatorProvider
     {
-        private readonly global::FluentValidation.IValidatorFactory _factory;
+        private readonly FV.IValidatorFactory _factory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FluentValidationValidatorProvider"/> class.
         /// </summary>
-        /// <param name="factory">The <see cref="T:global::FluentValidation.IValidatorFactory"/> used.</param>
-        public FluentValidationValidatorProvider(global::FluentValidation.IValidatorFactory factory)
+        /// <param name="factory">The <see cref="FV.IValidatorFactory"/> used.</param>
+        public FluentValidationValidatorProvider(FV.IValidatorFactory factory)
         {
             Ensure.Arg.NotNull(factory, nameof(factory));
             _factory = factory;
@@ -26,7 +27,10 @@ namespace AppCore.Validation.FluentValidation
         /// <inheritdoc />
         public IValidator CreateValidator(Type modelType)
         {
-            return new FluentValidationValidator(_factory.GetValidator(modelType));
+            FV.IValidator validator = _factory.GetValidator(modelType);
+            return validator != null
+                ? (IValidator) new FluentValidationValidator(validator)
+                : NullValidator.Instance;
         }
     }
 }

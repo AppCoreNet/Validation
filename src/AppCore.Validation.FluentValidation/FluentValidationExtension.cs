@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using AppCore.DependencyInjection;
 using AppCore.DependencyInjection.Builder;
 using AppCore.DependencyInjection.Facilities;
+using AppCore.Diagnostics;
 using FV = FluentValidation;
 
 namespace AppCore.Validation.FluentValidation
@@ -15,8 +16,8 @@ namespace AppCore.Validation.FluentValidation
     /// </summary>
     public sealed class FluentValidationExtension : FacilityExtension<IValidationFacility>
     {
-        private readonly List<Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility>> _registrationActions =
-            new List<Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility>>();
+        private readonly List<Action<IRegistrationBuilder, IValidationFacility>> _registrationActions =
+            new List<Action<IRegistrationBuilder, IValidationFacility>>();
 
         /// <inheritdoc />
         protected override void RegisterComponents(IComponentRegistry registry, IValidationFacility facility)
@@ -31,16 +32,17 @@ namespace AppCore.Validation.FluentValidation
                     .PerDependency()
                     .IfNoneRegistered();
 
-            IRegistrationBuilder<FV.IValidator> validatorRegistrationBuilder = registry.Register<FV.IValidator>();
-            foreach (Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility> registrationAction in _registrationActions)
+            IRegistrationBuilder validatorRegistrationBuilder = registry.Register(typeof(IValidator<>));
+            foreach (Action<IRegistrationBuilder, IValidationFacility> registrationAction in _registrationActions)
             {
                 registrationAction(validatorRegistrationBuilder, facility);
             }
         }
 
-        public void RegisterValidators(Action<IRegistrationBuilder<FV.IValidator>, IValidationFacility> registrationBuilder)
+        public void AddValidators(Action<IRegistrationBuilder, IValidationFacility> registration)
         {
-            _registrationActions.Add(registrationBuilder);
+            Ensure.Arg.NotNull(registration, nameof(registration));
+            _registrationActions.Add(registration);
         }
     }
 }
