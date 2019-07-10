@@ -32,7 +32,7 @@ namespace AppCore.Validation.FluentValidation
                     .PerDependency()
                     .IfNoneRegistered();
 
-            IRegistrationBuilder validatorRegistrationBuilder = registry.Register(typeof(IValidator<>));
+            IRegistrationBuilder validatorRegistrationBuilder = registry.Register(typeof(FV.IValidator<>));
             foreach (Action<IRegistrationBuilder, IValidationFacility> registrationAction in _registrationActions)
             {
                 registrationAction(validatorRegistrationBuilder, facility);
