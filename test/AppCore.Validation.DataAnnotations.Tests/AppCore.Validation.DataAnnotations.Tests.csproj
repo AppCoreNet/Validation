@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\src\AppCore.Validation.DataAnnotations\AppCore.Validation.DataAnnotations.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='net452'">
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>  
+  
 </Project>
