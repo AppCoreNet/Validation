@@ -41,10 +41,10 @@ registry.RegisterFacility<ValidationFacility>()
 ### FluentValidation
 
 Adds support for using FluentValidation.
-To use FluentValidation simply configure the provider when registering the facility:
+To use FluentValidation, configure the provider and add validators when registering the facility:
 ```
 registry.RegisterFacility<ValidationFacility>()
-        .AddFluentValidation();
+        .AddFluentValidation(fv => fv.UseValidators(r => r.Add<MyValidator>()));
 ```
 
 ## Contributing
