@@ -37,14 +37,14 @@ namespace AppCore.DependencyInjection
         /// <param name="builder">The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</param>
         /// <param name="register">The validator registration action.</param>
         /// <returns>The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</returns>
-        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> AddValidators(
+        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> UseValidators(
             this IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> builder,
             Action<IRegistrationBuilder, IValidationFacility> register)
         {
             Ensure.Arg.NotNull(builder, nameof(builder));
             Ensure.Arg.NotNull(register, nameof(register));
             
-            builder.Configure((f,e) => e.AddValidators(register));
+            builder.Configure((f,e) => e.RegisterValidator(register));
             return builder;
         }
 
@@ -54,11 +54,11 @@ namespace AppCore.DependencyInjection
         /// <param name="builder">The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</param>
         /// <param name="register">The validator registration action.</param>
         /// <returns>The <see cref="IFacilityExtensionBuilder{TFacility, TExtension}"/>.</returns>
-        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> AddValidators(
+        public static IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> UseValidators(
             this IFacilityExtensionBuilder<IValidationFacility, FluentValidationExtension> builder,
             Action<IRegistrationBuilder> register)
         {
-            return builder.AddValidators((r, _) => register(r));
+            return builder.UseValidators((r, _) => register(r));
         }
     }
 }

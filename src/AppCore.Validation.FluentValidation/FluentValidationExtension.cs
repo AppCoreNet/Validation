@@ -39,7 +39,11 @@ namespace AppCore.Validation.FluentValidation
             }
         }
 
-        public void AddValidators(Action<IRegistrationBuilder, IValidationFacility> registration)
+        /// <summary>
+        /// Registers components for the <see cref="FV.IValidator{T}"/> type.
+        /// </summary>
+        /// <param name="registration"></param>
+        public void RegisterValidator(Action<IRegistrationBuilder, IValidationFacility> registration)
         {
             Ensure.Arg.NotNull(registration, nameof(registration));
             _registrationActions.Add(registration);
