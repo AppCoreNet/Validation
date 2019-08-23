@@ -12,7 +12,10 @@ namespace AppCore.Validation.AspNetCore.Mvc.Filters
     {
         private static readonly ValidationExceptionFilter Filter = new ValidationExceptionFilter();
 
-        /// <inheritdoc />
+        /// <summary>
+        /// See <see cref="ValidationExceptionFilter.OnException"/>.
+        /// </summary>
+        /// <param name="context">The exception context.</param>
         public override void OnException(ExceptionContext context)
         {
             Filter.OnException(context);

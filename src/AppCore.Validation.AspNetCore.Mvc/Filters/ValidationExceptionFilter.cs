@@ -14,7 +14,11 @@ namespace AppCore.Validation.AspNetCore.Mvc.Filters
     /// </summary>
     public class ValidationExceptionFilter : IExceptionFilter
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Creates a <see cref="BadRequestObjectResult"/> with <see cref="ValidationProblemDetails"/> payload
+        /// if the exception is of type <see cref="ValidationException"/>.
+        /// </summary>
+        /// <param name="context">The exception context.</param>
         public void OnException(ExceptionContext context)
         {
             Ensure.Arg.NotNull(context, nameof(context));
@@ -33,15 +37,17 @@ namespace AppCore.Validation.AspNetCore.Mvc.Filters
                 Title = SR.ValidationProblemDetails_Title
             };
 
-            var errorsByProperties = validationException
-                                     .Result.Errors.Where(e => e.Severity >= ValidationErrorSeverity.Error)
-                                     .GroupBy(e => e.PropertyName)
-                                     .Select(
-                                         g => new
-                                         {
-                                             PropertyName = g.Key,
-                                             ErrorMessages = g.Select(em => em.ErrorMessage).ToArray()
-                                         });
+            var errorsByProperties =
+                validationException.Result.Errors
+                                   .Where(e => e.Severity >= ValidationErrorSeverity.Error)
+                                   .GroupBy(e => e.PropertyName)
+                                   .Select(
+                                       g => new
+                                       {
+                                           PropertyName = g.Key,
+                                           ErrorMessages = g.Select(em => em.ErrorMessage)
+                                                            .ToArray()
+                                       });
 
             foreach (var errorsByProperty in errorsByProperties)
             {
