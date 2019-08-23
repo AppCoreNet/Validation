@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Description>AppCore validation integration for AspNetCore MVC.</Description>
+    <Description>AppCore validation integration for ASP.NET Core MVC.</Description>
   </PropertyGroup>
 
   <ItemGroup>
