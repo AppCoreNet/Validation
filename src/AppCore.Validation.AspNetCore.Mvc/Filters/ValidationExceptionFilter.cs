@@ -27,18 +27,21 @@ namespace AppCore.Validation.AspNetCore.Mvc.Filters
                 return;
 
             context.ExceptionHandled = true;
-            context.Result = new BadRequestObjectResult(CreateProblemDetails(validationException));
+            context.Result = new BadRequestObjectResult(InitProblemDetails(new ValidationProblemDetails(), validationException));
         }
 
-        private static ValidationProblemDetails CreateProblemDetails(ValidationException validationException)
+        /// <summary>
+        /// Can be overridden to initialize the <see cref="ValidationProblemDetails"/>.
+        /// </summary>
+        /// <param name="details">The <see cref="ValidationProblemDetails"/>.</param>
+        /// <param name="exception">The <see cref="ValidationException"/>.</param>
+        /// <returns>The initialized <see cref="ValidationProblemDetails"/>.</returns>
+        protected virtual ValidationProblemDetails InitProblemDetails(ValidationProblemDetails details, ValidationException exception)
         {
-            var details = new ValidationProblemDetails
-            {
-                Title = SR.ValidationProblemDetails_Title
-            };
+            details.Title = SR.ValidationProblemDetails_Title;
 
             var errorsByProperties =
-                validationException.Result.Errors
+                exception.Result.Errors
                                    .Where(e => e.Severity >= ValidationErrorSeverity.Error)
                                    .GroupBy(e => e.PropertyName)
                                    .Select(
