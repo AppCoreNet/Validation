@@ -12,10 +12,11 @@ as you keep the copyright notice intact when redistributing or otherwise reusing
 
 Package                                           | Description
 --------------------------------------------------|------------------------------------------------------------------------------------------------------
-`AppCore.Validation`                              | Provides the default implementations agnostic to the actual validation framework.
-`AppCore.Validation.Abstractions`                 | Contains the public API of the model validation framework.
-`AppCore.Validation.DataAnnotations`              | Integrates DataAnnotations with the validation framework.
-`AppCore.Validation.FluentValidation`             | Integration of [FluentValidation](https://fluentvalidation.net/).
+`AppCore.Validation`                            | Provides the default implementations agnostic to the actual validation framework.
+`AppCore.Validation.Abstractions`              | Contains the public API of the model validation framework.
+`AppCore.Validation.DataAnnotations`           | Integrates DataAnnotations with the validation framework.
+`AppCore.Validation.FluentValidation`          | Integration of [FluentValidation](https://fluentvalidation.net/).
+`AppCore.Validation.AspNetCore.Mvc`            | Provides filters for ASP.NET Core MVC.
 
 ### Validation
 
@@ -44,7 +45,7 @@ Adds support for using FluentValidation.
 To use FluentValidation, configure the provider and add validators when registering the facility:
 ```
 registry.RegisterFacility<ValidationFacility>()
-        .AddFluentValidation(fv => fv.UseValidators(r => r.Add<MyValidator>()));
+        .AddFluentValidation(v => v.UseValidators(r => r.Add<MyValidator>()));
 ```
 
 ## Contributing

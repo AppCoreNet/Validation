@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCore.Validation.Abstractions", "src\AppCore.Validation.Abstractions\AppCore.Validation.Abstractions.csproj", "{E3C40A7E-3646-4867-B9E6-ADD3341A1CC9}"
 EndProject
@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCore.Validation.DataAnno
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCore.Validation.FluentValidation", "src\AppCore.Validation.FluentValidation\AppCore.Validation.FluentValidation.csproj", "{146D2961-F897-4B76-BC84-BDC3FDB13607}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCore.Validation.FluentValidation.Tests", "test\AppCore.Validation.FluentValidation.Tests\AppCore.Validation.FluentValidation.Tests.csproj", "{C0C14EC1-13CE-4922-B4CB-B200CC4F32CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCore.Validation.FluentValidation.Tests", "test\AppCore.Validation.FluentValidation.Tests\AppCore.Validation.FluentValidation.Tests.csproj", "{C0C14EC1-13CE-4922-B4CB-B200CC4F32CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCore.Validation.AspNetCore.Mvc", "src\AppCore.Validation.AspNetCore.Mvc\AppCore.Validation.AspNetCore.Mvc.csproj", "{5B898690-B3A0-4269-BDB5-F62DA8AA3A6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{C0C14EC1-13CE-4922-B4CB-B200CC4F32CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0C14EC1-13CE-4922-B4CB-B200CC4F32CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0C14EC1-13CE-4922-B4CB-B200CC4F32CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B898690-B3A0-4269-BDB5-F62DA8AA3A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B898690-B3A0-4269-BDB5-F62DA8AA3A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B898690-B3A0-4269-BDB5-F62DA8AA3A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B898690-B3A0-4269-BDB5-F62DA8AA3A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
