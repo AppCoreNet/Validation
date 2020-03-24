@@ -10,6 +10,8 @@ as you keep the copyright notice intact when redistributing or otherwise reusing
 
 ## Packages
 
+Latest development packages can be found on [MyGet](https://www.myget.org/gallery/appcorenet).
+
 Package                                           | Description
 --------------------------------------------------|------------------------------------------------------------------------------------------------------
 `AppCore.Validation`                            | Provides the default implementations agnostic to the actual validation framework.
