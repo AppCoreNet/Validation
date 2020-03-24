@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net452;netstandard1.1;netstandard1.3;netstandard2.0</TargetFrameworks>
     <RootNamespace>AppCore.Validation.DataAnnotations</RootNamespace>
-    <Description>AppCore validation with data annotations.</Description>
+    <Description>Provides integration of data annotations validation into AppCore .NET</Description>
   </PropertyGroup>
 
   <ItemGroup>
