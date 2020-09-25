@@ -1,9 +1,12 @@
 AppCore .NET Validation
 -----------------------
 
-[![Build Status](https://dev.azure.com/AppCoreNet/Validation/_apis/build/status/AppCoreNet.Validation?branchName=dev)](https://dev.azure.com/AppCoreNet/Validation/_build/latest?definitionId=4&branchName=dev)
+[![Build Status](https://dev.azure.com/AppCoreNet/Validation/_apis/build/status/AppCoreNet.Validation%20CI?branchName=dev)](https://dev.azure.com/AppCoreNet/Validation/_build/latest?definitionId=4&branchName=dev)
+![Azure DevOps tests (compact)](https://img.shields.io/azure-devops/tests/AppCoreNet/Validation/4?compact_message)
+![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/AppCoreNet/Validation/4/dev)
+![Nuget](https://img.shields.io/nuget/v/AppCore.Validation.Abstractions)
 
-This repository contains model validation abstractions and implementations targeting the .NET Framework and .NET Core.
+This repository contains abstractions and implementations for model validation. It targets the .NET Framework and .NET Core.
 
 All artifacts are licensed under the [MIT license](LICENSE). You are free to use them in open-source or commercial projects as long
 as you keep the copyright notice intact when redistributing or otherwise reusing our artifacts.
