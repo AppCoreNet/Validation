@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net452;netstandard1.1;netstandard1.3;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
     <RootNamespace>AppCore.Validation.DataAnnotations</RootNamespace>
     <Description>Provides integration of data annotations validation into AppCore .NET</Description>
   </PropertyGroup>
@@ -16,9 +16,7 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net452'">
-    <Reference Include="System.Runtime" />
-    <Reference Include="System.Threading.Tasks" />  
+  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
 
