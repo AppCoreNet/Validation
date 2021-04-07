@@ -1,5 +1,5 @@
-﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Licensed under the MIT License.
+// Copyright (c) 2018-2020 the AppCore .NET project.
 
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -12,13 +12,6 @@ namespace AppCore.Validation.DataAnnotations
     /// </summary>
     public sealed class DataAnnotationsValidatorProvider : IValidatorProvider
     {
-        #if NETSTANDARD1_1
-        /// <inheritdoc />
-        public IValidator CreateValidator(Type modelType)
-        {
-            return new DataAnnotationsValidator();
-        }
-        #else
         private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
@@ -37,6 +30,5 @@ namespace AppCore.Validation.DataAnnotations
         {
             return new DataAnnotationsValidator(_serviceProvider);
         }
-        #endif
     }
 }

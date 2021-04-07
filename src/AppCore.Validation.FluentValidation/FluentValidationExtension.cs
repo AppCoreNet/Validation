@@ -1,52 +1,69 @@
-﻿// Licensed under the MIT License.
-// Copyright (c) 2018,2019 the AppCore .NET project.
+// Licensed under the MIT License.
+// Copyright (c) 2020-2021 the AppCore .NET project.
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using AppCore.DependencyInjection;
-using AppCore.DependencyInjection.Builder;
 using AppCore.DependencyInjection.Facilities;
 using AppCore.Diagnostics;
+using AppCore.Validation.FluentValidation;
 using FV = FluentValidation;
 
-namespace AppCore.Validation.FluentValidation
+// ReSharper disable once CheckNamespace
+namespace AppCore.Validation
 {
     /// <summary>
-    /// Provides a extensions for the <see cref="IValidationFacility"/> which adds validation using FluentValidation.
+    /// Provides the FluentValidation extension.
     /// </summary>
-    public sealed class FluentValidationExtension : FacilityExtension<IValidationFacility>
+    public class FluentValidationExtension : FacilityExtension
     {
-        private readonly List<Action<IRegistrationBuilder, IValidationFacility>> _registrationActions =
-            new List<Action<IRegistrationBuilder, IValidationFacility>>();
-
-        /// <inheritdoc />
-        protected override void RegisterComponents(IComponentRegistry registry, IValidationFacility facility)
+        protected override void Build(IComponentRegistry registry)
         {
-            registry.Register<IValidatorProvider>()
-                    .Add<FluentValidationValidatorProvider>()
-                    .PerDependency()
-                    .IfNotRegistered();
+            base.Build(registry);
 
-            registry.Register<FV.IValidatorFactory>()
-                    .Add<ContainerValidatorFactory>()
-                    .PerDependency()
-                    .IfNoneRegistered();
-
-            IRegistrationBuilder validatorRegistrationBuilder = registry.Register(typeof(FV.IValidator<>));
-            foreach (Action<IRegistrationBuilder, IValidationFacility> registrationAction in _registrationActions)
-            {
-                registrationAction(validatorRegistrationBuilder, facility);
-            }
+            registry.TryAddEnumerable(ComponentRegistration.Transient<IValidatorProvider, FluentValidationValidatorProvider>());
+            registry.TryAdd(ComponentRegistration.Transient<FV.IValidatorFactory, ContainerValidatorFactory>());
         }
 
-        /// <summary>
-        /// Registers components for the <see cref="FV.IValidator{T}"/> type.
-        /// </summary>
-        /// <param name="registration"></param>
-        public void RegisterValidator(Action<IRegistrationBuilder, IValidationFacility> registration)
+        public FluentValidationExtension AddValidator<T>()
+            where T : FV.IValidator
         {
-            Ensure.Arg.NotNull(registration, nameof(registration));
-            _registrationActions.Add(registration);
+            return AddValidator(typeof(T));
+        }
+
+        public FluentValidationExtension AddValidator(Type validatorType)
+        {
+            Ensure.Arg.NotNull(validatorType, nameof(validatorType));
+
+            Type serviceType = validatorType.GetClosedTypeOf(typeof(FV.IValidator<>));
+            Register(r => r.TryAdd(ComponentRegistration.Transient(serviceType, validatorType)));
+
+            return this;
+        }
+
+        public FluentValidationExtension AddValidatorsFromAssemblies(
+            Action<AssemblyRegistrationBuilder> configureAssemblyBuilder)
+        {
+            Ensure.Arg.NotNull(configureAssemblyBuilder, nameof(configureAssemblyBuilder));
+
+            Register(r => r.AddFromAssemblies(b =>
+            {
+                b.ForType(typeof(FV.IValidator<>));
+                configureAssemblyBuilder(b);
+            }));
+
+            return this;
+        }
+
+        public FluentValidationExtension AddValidatorsFromAssemblies(IEnumerable<Assembly> assemblies)
+        {
+            return AddValidatorsFromAssemblies(b => b.WithAssemblies(assemblies));
+        }
+
+        public FluentValidationExtension AddValidatorsFromAssembly(Assembly assembly)
+        {
+            return AddValidatorsFromAssemblies(b => b.WithAssembly(assembly));
         }
     }
 }

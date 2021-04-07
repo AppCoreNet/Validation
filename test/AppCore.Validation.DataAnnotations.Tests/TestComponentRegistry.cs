@@ -1,26 +1,61 @@
 // Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Copyright (c) 2018-2021 the AppCore .NET project.
 
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AppCore.DependencyInjection;
 
-namespace AppCore.DependencyInjection
+namespace AppCore.Validation.DataAnnotations
 {
-    public class TestComponentRegistry : IComponentRegistry
+    public class TestComponentRegistry : IComponentRegistry, IEnumerable<ComponentRegistration>
     {
-        private readonly List<Func<IEnumerable<ComponentRegistration>>> _registrationCallbacks =
-            new List<Func<IEnumerable<ComponentRegistration>>>();
+        private readonly List<ComponentRegistration> _registrations = new List<ComponentRegistration>();
 
-        public void RegisterCallback(Func<IEnumerable<ComponentRegistration>> registration)
+        public IComponentRegistry Add(IEnumerable<ComponentRegistration> registrations)
         {
-            _registrationCallbacks.Add(registration);
+            foreach (ComponentRegistration registration in registrations)
+            {
+                _registrations.Add(registration);
+            }
+
+            return this;
         }
 
-        public IEnumerable<ComponentRegistration> GetRegistrations()
+        public IComponentRegistry TryAdd(IEnumerable<ComponentRegistration> registrations)
         {
-            return _registrationCallbacks.SelectMany(cb => cb())
-                                         .ToList();
+            foreach (ComponentRegistration registration in registrations)
+            {
+                if (_registrations.All(r => r.ContractType != registration.ContractType))
+                    _registrations.Add(registration);
+            }
+
+            return this;
+        }
+
+        public IComponentRegistry TryAddEnumerable(IEnumerable<ComponentRegistration> registrations)
+        {
+            foreach (ComponentRegistration registration in registrations)
+            {
+                if (!_registrations.Any(
+                    r => r.ContractType == registration.ContractType
+                         && r.GetImplementationType() == registration.GetImplementationType()))
+                {
+                    _registrations.Add(registration);
+                }
+            }
+
+            return this;
+        }
+
+        public IEnumerator<ComponentRegistration> GetEnumerator()
+        {
+            return _registrations.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

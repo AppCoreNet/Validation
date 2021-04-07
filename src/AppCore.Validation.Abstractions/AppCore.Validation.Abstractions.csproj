@@ -10,7 +10,6 @@
     <PackageReference Include="AppCore.Diagnostics.Sources" Version="$(AppCore_Shared_Version)">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="AppCore.DependencyInjection.Abstractions" Version="$(AppCore_DI_Version)" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.1'">

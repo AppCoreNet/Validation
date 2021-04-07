@@ -1,5 +1,5 @@
-﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Licensed under the MIT License.
+// Copyright (c) 2018-2020 the AppCore .NET project.
 
 using AppCore.DependencyInjection;
 using FluentAssertions;
@@ -13,18 +13,14 @@ namespace AppCore.Validation.DataAnnotations
         public void AddFluentValidationRegistersProvider()
         {
             var registry = new TestComponentRegistry();
+            registry.Add<ValidationFacility>(v => v.UseDataAnnotations());
 
-            registry.RegisterFacility<ValidationFacility>()
-                    .AddDataAnnotations();
-
-            registry.GetRegistrations()
-                    .Should()
+            registry.Should()
                     .Contain(
                         cr =>
                             cr.ContractType == typeof(IValidatorProvider)
                             && cr.ImplementationType == typeof(DataAnnotationsValidatorProvider)
-                            && cr.Lifetime == ComponentLifetime.Transient
-                            && cr.Flags == ComponentRegistrationFlags.IfNotRegistered);
+                            && cr.Lifetime == ComponentLifetime.Transient);
         }
     }
 }

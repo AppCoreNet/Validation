@@ -10,6 +10,10 @@
     <PackageReference Include="AppCore.Diagnostics.Sources" Version="$(AppCore_Shared_Version)">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="AppCore.TypeHelpers.Sources" Version="$(AppCore_Shared_Version)">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="AppCore.DependencyInjection.AssemblyExtensions" Version="$(AppCore_DI_Version)" />
     <PackageReference Include="FluentValidation" Version="[8.0.0,9.0.0)" />
   </ItemGroup>
 

@@ -1,7 +1,8 @@
-﻿// Licensed under the MIT License.
+// Licensed under the MIT License.
 // Copyright (c) 2018 the AppCore .NET project.
 
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -15,6 +16,9 @@ namespace AppCore.Validation.DataAnnotations
         [Fact]
         public async Task ValidateReturnsValidationResult()
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+
             var validator = new DataAnnotationsValidator(Substitute.For<IServiceProvider>());
             ValidationResult result = await validator.ValidateAsync(new TestModel(), CancellationToken.None);
 

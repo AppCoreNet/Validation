@@ -1,4 +1,4 @@
-﻿// Licensed under the MIT License.
+// Licensed under the MIT License.
 // Copyright (c) 2018,2019 the AppCore .NET project.
 
 using System;
@@ -22,7 +22,7 @@ namespace AppCore.Validation.FluentValidation
         /// <summary>
         /// Initializes a new instance of the <see cref="FluentValidationValidator"/>.
         /// </summary>
-        /// <param name="validator">The <see cref="T:global::FluentValidation.IValidator"/>.</param>
+        /// <param name="validator">The <see cref="FV.IValidator"/>.</param>
         public FluentValidationValidator(FV.IValidator validator)
         {
             Ensure.Arg.NotNull(validator, nameof(validator));

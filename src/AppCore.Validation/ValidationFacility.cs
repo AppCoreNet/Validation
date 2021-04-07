@@ -1,5 +1,5 @@
-﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Licensed under the MIT License.
+// Copyright (c) 2020-2021 the AppCore .NET project.
 
 using AppCore.DependencyInjection.Facilities;
 using AppCore.Validation;
@@ -10,20 +10,15 @@ namespace AppCore.DependencyInjection
     /// <summary>
     /// Represents the validation facility.
     /// </summary>
-    public sealed class ValidationFacility : Facility, IValidationFacility
+    public sealed class ValidationFacility : Facility
     {
         /// <inheritdoc />
-        protected override void RegisterComponents(IComponentRegistry registry)
+        protected override void Build(IComponentRegistry registry)
         {
-            registry.Register<IValidatorFactory>()
-                    .Add<ValidatorFactory>()
-                    .PerDependency()
-                    .IfNoneRegistered();
+            base.Build(registry);
 
-            registry.Register(typeof(IValidator<>))
-                    .Add(typeof(Validator<>))
-                    .PerDependency()
-                    .IfNoneRegistered();
+            registry.TryAdd(ComponentRegistration.Transient<IValidatorFactory, ValidatorFactory>());
+            registry.TryAdd(ComponentRegistration.Transient(typeof(IValidator<>), typeof(Validator<>)));
         }
     }
 }

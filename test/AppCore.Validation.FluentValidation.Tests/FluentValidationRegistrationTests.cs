@@ -1,5 +1,5 @@
-﻿// Licensed under the MIT License.
-// Copyright (c) 2018,2019 the AppCore .NET project.
+// Licensed under the MIT License.
+// Copyright (c) 2018-2021 the AppCore .NET project.
 
 using AppCore.DependencyInjection;
 using FluentAssertions;
@@ -15,17 +15,32 @@ namespace AppCore.Validation.FluentValidation
         {
             var registry = new TestComponentRegistry();
 
-            registry.RegisterFacility<ValidationFacility>()
-                    .AddFluentValidation();
+            registry.Add<ValidationFacility>(v => v.UseFluentValidation());
 
-            registry.GetRegistrations()
-                    .Should()
+            registry.Should()
                     .Contain(
                         cr =>
                             cr.ContractType == typeof(IValidatorProvider)
                             && cr.ImplementationType == typeof(FluentValidationValidatorProvider)
-                            && cr.Lifetime == ComponentLifetime.Transient
-                            && cr.Flags == ComponentRegistrationFlags.IfNotRegistered);
+                            && cr.Lifetime == ComponentLifetime.Transient);
+        }
+
+        [Fact]
+        public void AddValidatorRegistersValidator()
+        {
+            var registry = new TestComponentRegistry();
+
+            registry.Add<ValidationFacility>(
+                v =>
+                    v.UseFluentValidation(
+                        f => f
+                            .AddValidator<TestModelValidator>()));
+
+            registry.Should()
+                    .Contain(
+                        cr =>
+                            cr.ContractType == typeof(FV.IValidator<TestModel>)
+                            && cr.Lifetime == ComponentLifetime.Transient);
         }
 
         [Fact]
@@ -33,16 +48,21 @@ namespace AppCore.Validation.FluentValidation
         {
             var registry = new TestComponentRegistry();
 
-            registry.RegisterFacility<ValidationFacility>()
-                    .AddFluentValidation(
-                        fv => fv.UseValidators(
-                            r => r.Add<TestModelValidator>()));
+            registry.Add<ValidationFacility>(
+                v =>
+                    v.UseFluentValidation(
+                        f => f
+                            .AddValidatorsFromAssemblies(
+                                a => a
+                                     .ClearFilters()
+                                     .WithAssembly(typeof(TestModelValidator).Assembly)
+                            )
+                    ));
 
-            registry.GetRegistrations()
-                    .Should()
+            registry.Should()
                     .Contain(
                         cr =>
-                            cr.ContractType == typeof(FV.IValidator<>)
+                            cr.ContractType == typeof(FV.IValidator<TestModel>)
                             && cr.Lifetime == ComponentLifetime.Transient);
         }
     }

@@ -1,5 +1,5 @@
-﻿// Licensed under the MIT License.
-// Copyright (c) 2018 the AppCore .NET project.
+// Licensed under the MIT License.
+// Copyright (c) 2018-2020 the AppCore .NET project.
 
 using System;
 using System.Collections.Generic;
@@ -16,15 +16,6 @@ namespace AppCore.Validation.DataAnnotations
     /// </summary>
     public class DataAnnotationsValidator : IValidator
     {
-        #if NETSTANDARD1_1
-
-        private ValidationContext CreateValidationContext(object model, IDictionary<object, object> items)
-        {
-            return new ValidationContext(model, items);
-        }
-
-        #else
-
         private readonly IServiceProvider _serviceProvider;
 
         /// <summary>
@@ -38,17 +29,10 @@ namespace AppCore.Validation.DataAnnotations
             _serviceProvider = serviceProvider;
         }
 
-        private ValidationContext CreateValidationContext(object obj, IDictionary<object, object> items)
-        {
-            return new ValidationContext(obj, _serviceProvider, items);
-        }
-
-        #endif
-
         /// <inheritdoc />
         public ValueTask<ValidationResult> ValidateAsync(object model, CancellationToken cancellationToken)
         {
-            ValidationContext context = CreateValidationContext(model, null);
+            var context = new ValidationContext(model, _serviceProvider, null);
             var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             if (!Validator.TryValidateObject(model, context, results))
             {
