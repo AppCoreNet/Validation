@@ -2,11 +2,11 @@
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
 using System;
-using AppCore.DependencyInjection;
 using AppCore.Diagnostics;
+using AppCore.Validation;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Validation
+namespace AppCore.DependencyInjection
 {
     /// <summary>
     /// Provides extension methods to register FluentValidation.
