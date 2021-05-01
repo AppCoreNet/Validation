@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\AppCore.Validation.DataAnnotations\AppCore.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="..\..\src\AppCore.Validation\AppCore.Validation.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">

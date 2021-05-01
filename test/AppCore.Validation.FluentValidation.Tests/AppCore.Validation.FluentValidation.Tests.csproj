@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\AppCore.Validation.FluentValidation\AppCore.Validation.FluentValidation.csproj" />
+    <ProjectReference Include="..\..\src\AppCore.Validation\AppCore.Validation.csproj" />
   </ItemGroup>
 
 </Project>

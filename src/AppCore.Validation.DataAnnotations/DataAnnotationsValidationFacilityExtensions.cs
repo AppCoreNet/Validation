@@ -18,7 +18,7 @@ namespace AppCore.Validation
         /// </summary>
         /// <param name="facility">The <see cref="ValidationFacility"/>.</param>
         /// <returns>The <see cref="ValidationFacility"/>.</returns>
-        public static ValidationFacility UseDataAnnotations(this ValidationFacility facility)
+        public static IValidationFacility UseDataAnnotations(this IValidationFacility facility)
         {
             Ensure.Arg.NotNull(facility, nameof(facility));
 

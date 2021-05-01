@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppCore.Validation\AppCore.Validation.csproj" />
+    <ProjectReference Include="..\AppCore.Validation.Abstractions\AppCore.Validation.Abstractions.csproj" />
   </ItemGroup>
   
 </Project>
