@@ -13,7 +13,7 @@ namespace AppCore.Validation
         public void RegisterValidationFacilityRegistersComponents()
         {
             var registry = new TestComponentRegistry();
-            registry.Add<ValidationFacility>();
+            registry.AddFacility<ValidationFacility>();
 
             registry
                     .Should()

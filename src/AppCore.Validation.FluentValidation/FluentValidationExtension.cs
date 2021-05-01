@@ -38,7 +38,7 @@ namespace AppCore.Validation
             Ensure.Arg.NotNull(validatorType, nameof(validatorType));
 
             Type serviceType = validatorType.GetClosedTypeOf(typeof(FV.IValidator<>));
-            Register(r => r.TryAdd(ComponentRegistration.Transient(serviceType, validatorType)));
+            ConfigureRegistry(r => r.TryAdd(ComponentRegistration.Transient(serviceType, validatorType)));
 
             return this;
         }
@@ -48,7 +48,7 @@ namespace AppCore.Validation
         {
             Ensure.Arg.NotNull(configureAssemblyBuilder, nameof(configureAssemblyBuilder));
 
-            Register(r => r.AddFromAssemblies(typeof(FV.IValidator<>), configureAssemblyBuilder));
+            ConfigureRegistry(r => r.AddFromAssemblies(typeof(FV.IValidator<>), configureAssemblyBuilder));
             return this;
         }
 
@@ -61,5 +61,7 @@ namespace AppCore.Validation
         {
             return AddValidatorsFromAssemblies(b => b.From(assembly));
         }
+
+
     }
 }
