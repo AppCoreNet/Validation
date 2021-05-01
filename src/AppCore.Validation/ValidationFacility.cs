@@ -10,7 +10,7 @@ namespace AppCore.DependencyInjection
     /// <summary>
     /// Represents the validation facility.
     /// </summary>
-    public sealed class ValidationFacility : Facility, IValidationFacility
+    public sealed class ValidationFacility : Facility
     {
         /// <inheritdoc />
         protected override void Build(IComponentRegistry registry)
