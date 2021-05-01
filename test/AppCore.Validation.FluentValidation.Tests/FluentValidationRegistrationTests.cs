@@ -54,8 +54,8 @@ namespace AppCore.Validation.FluentValidation
                         f => f
                             .AddValidatorsFromAssemblies(
                                 a => a
-                                     .ClearFilters()
-                                     .WithAssembly(typeof(TestModelValidator).Assembly)
+                                     .ClearDefaultFilters()
+                                     .From(typeof(TestModelValidator).Assembly)
                             )
                     ));
 

@@ -18,6 +18,7 @@ namespace AppCore.Validation
     /// </summary>
     public class FluentValidationExtension : FacilityExtension
     {
+        /// <inheritdoc />
         protected override void Build(IComponentRegistry registry)
         {
             base.Build(registry);
@@ -47,23 +48,18 @@ namespace AppCore.Validation
         {
             Ensure.Arg.NotNull(configureAssemblyBuilder, nameof(configureAssemblyBuilder));
 
-            Register(r => r.AddFromAssemblies(b =>
-            {
-                b.ForType(typeof(FV.IValidator<>));
-                configureAssemblyBuilder(b);
-            }));
-
+            Register(r => r.AddFromAssemblies(typeof(FV.IValidator<>), configureAssemblyBuilder));
             return this;
         }
 
         public FluentValidationExtension AddValidatorsFromAssemblies(IEnumerable<Assembly> assemblies)
         {
-            return AddValidatorsFromAssemblies(b => b.WithAssemblies(assemblies));
+            return AddValidatorsFromAssemblies(b => b.From(assemblies));
         }
 
         public FluentValidationExtension AddValidatorsFromAssembly(Assembly assembly)
         {
-            return AddValidatorsFromAssemblies(b => b.WithAssembly(assembly));
+            return AddValidatorsFromAssemblies(b => b.From(assembly));
         }
     }
 }
