@@ -27,13 +27,13 @@ namespace AppCore.Validation
             registry.TryAdd(ComponentRegistration.Transient<FV.IValidatorFactory, ContainerValidatorFactory>());
         }
 
-        public FluentValidationExtension AddValidator<T>()
+        public FluentValidationExtension WithValidator<T>()
             where T : FV.IValidator
         {
-            return AddValidator(typeof(T));
+            return WithValidator(typeof(T));
         }
 
-        public FluentValidationExtension AddValidator(Type validatorType)
+        public FluentValidationExtension WithValidator(Type validatorType)
         {
             Ensure.Arg.NotNull(validatorType, nameof(validatorType));
 
@@ -43,7 +43,7 @@ namespace AppCore.Validation
             return this;
         }
 
-        public FluentValidationExtension AddValidatorsFromAssemblies(
+        public FluentValidationExtension WithValidatorsFromAssemblies(
             Action<AssemblyRegistrationBuilder> configureAssemblyBuilder)
         {
             Ensure.Arg.NotNull(configureAssemblyBuilder, nameof(configureAssemblyBuilder));
@@ -52,16 +52,14 @@ namespace AppCore.Validation
             return this;
         }
 
-        public FluentValidationExtension AddValidatorsFromAssemblies(IEnumerable<Assembly> assemblies)
+        public FluentValidationExtension WithValidatorsFromAssemblies(IEnumerable<Assembly> assemblies)
         {
-            return AddValidatorsFromAssemblies(b => b.From(assemblies));
+            return WithValidatorsFromAssemblies(b => b.From(assemblies));
         }
 
         public FluentValidationExtension AddValidatorsFromAssembly(Assembly assembly)
         {
-            return AddValidatorsFromAssemblies(b => b.From(assembly));
+            return WithValidatorsFromAssemblies(b => b.From(assembly));
         }
-
-
     }
 }

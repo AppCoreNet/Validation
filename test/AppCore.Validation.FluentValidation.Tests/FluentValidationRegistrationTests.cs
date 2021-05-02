@@ -34,7 +34,7 @@ namespace AppCore.Validation.FluentValidation
                 v =>
                     v.UseFluentValidation(
                         f => f
-                            .AddValidator<TestModelValidator>()));
+                            .WithValidator<TestModelValidator>()));
 
             registry.Should()
                     .Contain(
@@ -52,7 +52,7 @@ namespace AppCore.Validation.FluentValidation
                 v =>
                     v.UseFluentValidation(
                         f => f
-                            .AddValidatorsFromAssemblies(
+                            .WithValidatorsFromAssemblies(
                                 a => a
                                      .ClearDefaultFilters()
                                      .From(typeof(TestModelValidator).Assembly)
