@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net5</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net5</TargetFrameworks>
     <Description>Provides integration of AppCore .NET validation into ASP.NET Core MVC.</Description>
   </PropertyGroup>
 
@@ -11,7 +11,11 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp2.1'">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 

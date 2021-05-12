@@ -52,7 +52,6 @@ namespace AppCore.Validation.FluentValidation
                 v =>
                     v.UseFluentValidation(
                         f => f
-                             .
                             .WithValidatorsFrom(
                                 s => s.Assemblies(
                                     a => a
