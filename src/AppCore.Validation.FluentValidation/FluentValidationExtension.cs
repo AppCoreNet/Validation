@@ -2,8 +2,6 @@
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 using AppCore.DependencyInjection;
 using AppCore.DependencyInjection.Facilities;
 using AppCore.Diagnostics;
@@ -43,23 +41,20 @@ namespace AppCore.Validation
             return this;
         }
 
-        public FluentValidationExtension WithValidatorsFromAssemblies(
-            Action<AssemblyRegistrationBuilder> configureAssemblyBuilder)
+        public FluentValidationExtension WithValidatorsFrom(Action<IComponentRegistrationSources> configure)
         {
-            Ensure.Arg.NotNull(configureAssemblyBuilder, nameof(configureAssemblyBuilder));
+            Ensure.Arg.NotNull(configure, nameof(configure));
 
-            ConfigureRegistry(r => r.AddFromAssemblies(typeof(FV.IValidator<>), configureAssemblyBuilder));
+            ConfigureRegistry(r =>
+            {
+                var sources = new ComponentRegistrationSources()
+                    .WithContract(typeof(FV.IValidator<>))
+                    .WithDefaultLifetime(ComponentLifetime.Transient);
+
+                configure(sources);
+                r.TryAdd(sources.BuildRegistrations());
+            });
             return this;
-        }
-
-        public FluentValidationExtension WithValidatorsFromAssemblies(IEnumerable<Assembly> assemblies)
-        {
-            return WithValidatorsFromAssemblies(b => b.From(assemblies));
-        }
-
-        public FluentValidationExtension AddValidatorsFromAssembly(Assembly assembly)
-        {
-            return WithValidatorsFromAssemblies(b => b.From(assembly));
         }
     }
 }

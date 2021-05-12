@@ -52,10 +52,12 @@ namespace AppCore.Validation.FluentValidation
                 v =>
                     v.UseFluentValidation(
                         f => f
-                            .WithValidatorsFromAssemblies(
-                                a => a
-                                     .ClearDefaultFilters()
-                                     .From(typeof(TestModelValidator).Assembly)
+                             .
+                            .WithValidatorsFrom(
+                                s => s.Assemblies(
+                                    a => a
+                                         .ClearDefaultFilters()
+                                         .From(typeof(TestModelValidator).Assembly))
                             )
                     ));
 
