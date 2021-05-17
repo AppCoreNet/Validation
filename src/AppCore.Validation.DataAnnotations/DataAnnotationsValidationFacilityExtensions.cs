@@ -20,7 +20,6 @@ namespace AppCore.DependencyInjection
         public static ValidationFacility UseDataAnnotations(this ValidationFacility facility)
         {
             Ensure.Arg.NotNull(facility, nameof(facility));
-
             facility.AddExtension<DataAnnotationsValidationExtension>();
             return facility;
         }

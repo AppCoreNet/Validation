@@ -47,12 +47,9 @@ namespace AppCore.Validation
 
             ConfigureRegistry(r =>
             {
-                var sources = new ComponentRegistrationSources()
-                    .WithContract(typeof(FV.IValidator<>))
-                    .WithDefaultLifetime(ComponentLifetime.Transient);
-
+                var sources = new ComponentRegistrationSources(typeof(FV.IValidator<>));
                 configure(sources);
-                r.TryAdd(sources.BuildRegistrations());
+                r.TryAdd(sources.GetRegistrations());
             });
             return this;
         }

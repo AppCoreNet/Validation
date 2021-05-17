@@ -1,11 +1,10 @@
 // Licensed under the MIT License.
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
+using AppCore.DependencyInjection;
 using AppCore.DependencyInjection.Facilities;
-using AppCore.Validation;
 
-// ReSharper disable once CheckNamespace
-namespace AppCore.DependencyInjection
+namespace AppCore.Validation
 {
     /// <summary>
     /// Represents the validation facility.

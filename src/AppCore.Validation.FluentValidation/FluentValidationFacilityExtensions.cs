@@ -24,10 +24,7 @@ namespace AppCore.DependencyInjection
             Action<FluentValidationExtension> configure = null)
         {
             Ensure.Arg.NotNull(facility, nameof(facility));
-
-            var extension = facility.AddExtension<FluentValidationExtension>();
-            configure?.Invoke(extension);
-
+            facility.AddExtension(configure);
             return facility;
         }
     }
