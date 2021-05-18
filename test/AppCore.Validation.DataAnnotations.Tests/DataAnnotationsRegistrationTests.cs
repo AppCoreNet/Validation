@@ -13,7 +13,7 @@ namespace AppCore.Validation.DataAnnotations
         public void AddFluentValidationRegistersProvider()
         {
             var registry = new TestComponentRegistry();
-            registry.AddFacility<ValidationFacility>(v => v.UseDataAnnotations());
+            registry.AddValidation(v => v.UseDataAnnotations());
 
             registry.Should()
                     .Contain(

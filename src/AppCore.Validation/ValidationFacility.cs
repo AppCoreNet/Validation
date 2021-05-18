@@ -1,10 +1,10 @@
 // Licensed under the MIT License.
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
-using AppCore.DependencyInjection;
-using AppCore.DependencyInjection.Facilities;
+using AppCore.Validation;
 
-namespace AppCore.Validation
+// ReSharper disable once CheckNamespace
+namespace AppCore.DependencyInjection.Facilities
 {
     /// <summary>
     /// Represents the validation facility.
@@ -16,8 +16,11 @@ namespace AppCore.Validation
         {
             base.Build(registry);
 
-            registry.TryAdd(ComponentRegistration.Transient<IValidatorFactory, ValidatorFactory>());
-            registry.TryAdd(ComponentRegistration.Transient(typeof(IValidator<>), typeof(Validator<>)));
+            registry.TryAdd(new[]
+            {
+                ComponentRegistration.Transient<IValidatorFactory, ValidatorFactory>(),
+                ComponentRegistration.Transient(typeof(IValidator<>), typeof(Validator<>))
+            });
         }
     }
 }
