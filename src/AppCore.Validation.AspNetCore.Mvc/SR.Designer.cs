@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppCore.Validation.AspNetCore.Mvc {
+namespace AppCore.ModelValidation.AspNetCore.Mvc {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AppCore.Validation.AspNetCore.Mvc {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AppCore.Validation.AspNetCore.Mvc.SR", typeof(SR).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AppCore.ModelValidation.AspNetCore.Mvc.SR", typeof(SR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

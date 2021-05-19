@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <RootNamespace>AppCore.Validation</RootNamespace>
-    <Description>Provides default AppCore .NET validation implementations.</Description>
+    <Description>Provides default AppCore .NET model validation implementations.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppCore.Validation.Abstractions\AppCore.Validation.Abstractions.csproj" />
+    <ProjectReference Include="..\AppCore.Validation.Abstractions\AppCore.ModelValidation.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <RootNamespace>AppCore.Validation.DataAnnotations</RootNamespace>
-    <Description>Provides integration of data annotations validation into AppCore .NET</Description>
+    <Description>Provides integration of data annotations model validation into AppCore .NET</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppCore.Validation\AppCore.Validation.csproj" />
+    <ProjectReference Include="..\AppCore.Validation\AppCore.ModelValidation.csproj" />
   </ItemGroup>
 
 </Project>

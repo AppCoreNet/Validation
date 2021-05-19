@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net5</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Unix'">$(TargetFrameworks);net461</TargetFrameworks>
-    <RootNamespace>AppCore.Validation.DataAnnotations</RootNamespace>
+    <RootNamespace>AppCore.ModelValidation.DataAnnotations</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.Validation.DataAnnotations\AppCore.Validation.DataAnnotations.csproj" />
+    <ProjectReference Include="..\..\src\AppCore.Validation.DataAnnotations\AppCore.ModelValidation.DataAnnotations.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">
