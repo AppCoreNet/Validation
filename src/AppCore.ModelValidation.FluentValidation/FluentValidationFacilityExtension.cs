@@ -2,18 +2,19 @@
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
 using System;
+using AppCore.DependencyInjection;
+using AppCore.DependencyInjection.Facilities;
 using AppCore.Diagnostics;
-using AppCore.ModelValidation;
 using AppCore.ModelValidation.FluentValidation;
 using FV = FluentValidation;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.DependencyInjection.Facilities
+namespace AppCore.ModelValidation
 {
     /// <summary>
     /// Provides the FluentValidation extension.
     /// </summary>
-    public class FluentValidationExtension : FacilityExtension
+    public class FluentValidationFacilityExtension : FacilityExtension
     {
         /// <inheritdoc />
         protected override void Build(IComponentRegistry registry)
@@ -24,13 +25,13 @@ namespace AppCore.DependencyInjection.Facilities
             registry.TryAdd(ComponentRegistration.Transient<FV.IValidatorFactory, ContainerValidatorFactory>());
         }
 
-        public FluentValidationExtension WithValidator<T>()
+        public FluentValidationFacilityExtension WithValidator<T>()
             where T : FV.IValidator
         {
             return WithValidator(typeof(T));
         }
 
-        public FluentValidationExtension WithValidator(Type validatorType)
+        public FluentValidationFacilityExtension WithValidator(Type validatorType)
         {
             Ensure.Arg.NotNull(validatorType, nameof(validatorType));
 
@@ -40,7 +41,7 @@ namespace AppCore.DependencyInjection.Facilities
             return this;
         }
 
-        public FluentValidationExtension WithValidatorsFrom(Action<IComponentRegistrationSources> configure)
+        public FluentValidationFacilityExtension WithValidatorsFrom(Action<IComponentRegistrationSources> configure)
         {
             Ensure.Arg.NotNull(configure, nameof(configure));
 

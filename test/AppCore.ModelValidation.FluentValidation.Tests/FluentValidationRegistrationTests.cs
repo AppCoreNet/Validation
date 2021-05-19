@@ -15,7 +15,7 @@ namespace AppCore.ModelValidation.FluentValidation
         {
             var registry = new TestComponentRegistry();
 
-            registry.AddValidation(v => v.UseFluentValidation());
+            registry.AddModelValidation(v => v.UseFluentValidation());
 
             registry.Should()
                     .Contain(
@@ -30,7 +30,7 @@ namespace AppCore.ModelValidation.FluentValidation
         {
             var registry = new TestComponentRegistry();
 
-            registry.AddValidation(
+            registry.AddModelValidation(
                 v =>
                     v.UseFluentValidation(
                         f => f
@@ -48,7 +48,7 @@ namespace AppCore.ModelValidation.FluentValidation
         {
             var registry = new TestComponentRegistry();
 
-            registry.AddValidation(
+            registry.AddModelValidation(
                 v =>
                     v.UseFluentValidation(
                         f => f

@@ -17,18 +17,18 @@ Latest development packages can be found on [MyGet](https://www.myget.org/galler
 
 Package                                           | Description
 --------------------------------------------------|------------------------------------------------------------------------------------------------------
-`AppCore.Validation`                            | Provides the default implementations agnostic to the actual validation framework.
-`AppCore.Validation.Abstractions`              | Contains the public API of the model validation framework.
-`AppCore.Validation.DataAnnotations`           | Integrates DataAnnotations with the validation framework.
-`AppCore.Validation.FluentValidation`          | Integration of [FluentValidation](https://fluentvalidation.net/).
-`AppCore.Validation.AspNetCore.Mvc`            | Provides filters for ASP.NET Core MVC.
+`AppCore.ModelValidation`                         | Provides the default implementations agnostic to the actual validation framework.
+`AppCore.ModelValidation.Abstractions`            | Contains the public API of the model validation framework.
+`AppCore.ModelValidation.DataAnnotations`         | Integrates DataAnnotations with the validation framework.
+`AppCore.ModelValidation.FluentValidation`        | Integration of [FluentValidation](https://fluentvalidation.net/).
+`AppCore.ModelValidation.AspNetCore.Mvc`          | Provides filters for ASP.NET Core MVC.
 
 ### Validation
 
 This packages includes the default implementations. To configure validation in your application, register the facility:
 
 ```
-registry.RegisterFacility<ValidationFacility>();
+registry.AddModelValidation();
 ```
 
 ### Abstractions
@@ -40,8 +40,7 @@ This packages includes the validation API for applications and providers.
 Adds support for using DataAnnotations.
 To use DataAnnotations configure the provider when registering the facility:
 ```
-registry.RegisterFacility<ValidationFacility>()
-        .AddDataAnnotations();
+registry.AddModelValidation(v => v.UseDataAnnotations());
 ```
 
 ### FluentValidation
@@ -49,8 +48,7 @@ registry.RegisterFacility<ValidationFacility>()
 Adds support for using FluentValidation.
 To use FluentValidation, configure the provider and add validators when registering the facility:
 ```
-registry.RegisterFacility<ValidationFacility>()
-        .AddFluentValidation(v => v.UseValidators(r => r.Add<MyValidator>()));
+registry.AddModelValidation(v => v.UseFluentValidation(fv => fv.WithValidator<MyValidator>()));
 ```
 
 ## Contributing

@@ -1,26 +1,30 @@
 // Licensed under the MIT License.
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
-using AppCore.DependencyInjection.Facilities;
+using System;
 using AppCore.Diagnostics;
+using AppCore.ModelValidation;
 
 // ReSharper disable once CheckNamespace
 namespace AppCore.DependencyInjection
 {
     /// <summary>
-    /// Provides extension methods to register data annotations validation.
+    /// Provides extension methods to register FluentValidation.
     /// </summary>
-    public static class DataAnnotationsValidationFacilityExtensions
+    public static class ModelValidationFacilityExtensions
     {
         /// <summary>
-        /// Adds validation using <see cref="System.ComponentModel.DataAnnotations"/>.
+        /// Adds validation using FluentValidation.
         /// </summary>
         /// <param name="facility">The <see cref="ModelValidationFacility"/>.</param>
+        /// <param name="configure"></param>
         /// <returns>The <see cref="ModelValidationFacility"/>.</returns>
-        public static ModelValidationFacility UseDataAnnotations(this ModelValidationFacility facility)
+        public static ModelValidationFacility UseFluentValidation(
+            this ModelValidationFacility facility,
+            Action<FluentValidationFacilityExtension> configure = null)
         {
             Ensure.Arg.NotNull(facility, nameof(facility));
-            facility.AddExtension<DataAnnotationsValidationExtension>();
+            facility.AddExtension(configure);
             return facility;
         }
     }
