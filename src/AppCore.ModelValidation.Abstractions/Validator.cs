@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AppCore.Diagnostics;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     /// <summary>
     /// Represents a typed validator.

@@ -1,13 +1,12 @@
 // Licensed under the MIT License.
-// Copyright (c) 2018,2019 the AppCore .NET project.
+// Copyright (c) 2018-2021 the AppCore .NET project.
 
 using System.Linq;
 using AppCore.Diagnostics;
-using AppCore.ModelValidation.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace AppCore.Validation.AspNetCore.Mvc.Filters
+namespace AppCore.ModelValidation.AspNetCore.Mvc.Filters
 {
     /// <summary>
     /// Provides a exception filter which returns <see cref="BadRequestObjectResult"/> with a <see cref="ValidationProblemDetails"/>

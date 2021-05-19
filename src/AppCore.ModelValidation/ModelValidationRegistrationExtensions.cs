@@ -8,19 +8,19 @@ using AppCore.DependencyInjection.Facilities;
 namespace AppCore.DependencyInjection
 {
     /// <summary>
-    /// Provides extension methods to register the <see cref="ValidationFacility"/>.
+    /// Provides extension methods to register the <see cref="ModelValidationFacility"/>.
     /// </summary>
-    public static class ValidationRegistrationExtensions
+    public static class ModelValidationRegistrationExtensions
     {
         /// <summary>
-        /// Adds the <see cref="ValidationFacility"/> to the <see cref="IComponentRegistry"/>.
+        /// Adds the <see cref="ModelValidationFacility"/> to the <see cref="IComponentRegistry"/>.
         /// </summary>
         /// <param name="registry">The <see cref="IComponentRegistry"/>.</param>
         /// <param name="configure">The configuration delegate.</param>
         /// <returns>The <see cref="IComponentRegistry"/>.</returns>
         public static IComponentRegistry AddValidation(
             this IComponentRegistry registry,
-            Action<ValidationFacility> configure = null)
+            Action<ModelValidationFacility> configure = null)
         {
             return registry.AddFacility(configure);
         }

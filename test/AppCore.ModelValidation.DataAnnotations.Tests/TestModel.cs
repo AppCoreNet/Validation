@@ -3,7 +3,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace AppCore.Validation.DataAnnotations
+namespace AppCore.ModelValidation.DataAnnotations
 {
     public class TestModel
     {

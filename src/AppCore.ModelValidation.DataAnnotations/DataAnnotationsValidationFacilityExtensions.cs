@@ -15,9 +15,9 @@ namespace AppCore.DependencyInjection
         /// <summary>
         /// Adds validation using <see cref="System.ComponentModel.DataAnnotations"/>.
         /// </summary>
-        /// <param name="facility">The <see cref="ValidationFacility"/>.</param>
-        /// <returns>The <see cref="ValidationFacility"/>.</returns>
-        public static ValidationFacility UseDataAnnotations(this ValidationFacility facility)
+        /// <param name="facility">The <see cref="ModelValidationFacility"/>.</param>
+        /// <returns>The <see cref="ModelValidationFacility"/>.</returns>
+        public static ModelValidationFacility UseDataAnnotations(this ModelValidationFacility facility)
         {
             Ensure.Arg.NotNull(facility, nameof(facility));
             facility.AddExtension<DataAnnotationsValidationExtension>();

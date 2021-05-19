@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.Validation.FluentValidation\AppCore.Validation.FluentValidation.csproj" />
+    <ProjectReference Include="..\..\src\AppCore.ModelValidation.FluentValidation\AppCore.ModelValidation.FluentValidation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

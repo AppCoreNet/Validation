@@ -4,7 +4,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     /// <summary>
     /// Represents a model validator.

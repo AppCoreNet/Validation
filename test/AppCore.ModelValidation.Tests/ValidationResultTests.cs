@@ -4,7 +4,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     public class ValidationResultTests
     {

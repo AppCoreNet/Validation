@@ -5,7 +5,7 @@ using AppCore.DependencyInjection;
 using FluentAssertions;
 using Xunit;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     public class ValidationRegistrationTests
     {

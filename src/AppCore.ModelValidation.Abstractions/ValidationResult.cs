@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AppCore.Diagnostics;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     /// <summary>
     /// Represents the result of a model validation.

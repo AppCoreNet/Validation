@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net5</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' != 'Unix'">$(TargetFrameworks);net461</TargetFrameworks>
-    <RootNamespace>AppCore.Validation</RootNamespace>
+    <RootNamespace>AppCore.ModelValidation</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.Validation\AppCore.ModelValidation.csproj" />
+    <ProjectReference Include="..\..\src\AppCore.ModelValidation\AppCore.ModelValidation.csproj" />
   </ItemGroup>
 
 </Project>

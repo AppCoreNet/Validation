@@ -1,10 +1,11 @@
-﻿// Licensed under the MIT License.
+// Licensed under the MIT License.
 // Copyright (c) 2018,2019 the AppCore .NET project.
 
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AppCore.Validation.FluentValidation
+// ReSharper disable once CheckNamespace
+namespace AppCore.ModelValidation.FluentValidation
 {
     internal class NullValidator : IValidator
     {

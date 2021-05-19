@@ -10,7 +10,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using FV = FluentValidation;
 
-namespace AppCore.Validation.FluentValidation
+namespace AppCore.ModelValidation.FluentValidation
 {
     /// <summary>
     /// Provides a <see cref="IValidator"/> which uses FluentValidation.

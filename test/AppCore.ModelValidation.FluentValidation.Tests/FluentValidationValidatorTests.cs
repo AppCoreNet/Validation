@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 
-namespace AppCore.Validation.FluentValidation
+namespace AppCore.ModelValidation.FluentValidation
 {
     public class FluentValidationValidatorTests
     {

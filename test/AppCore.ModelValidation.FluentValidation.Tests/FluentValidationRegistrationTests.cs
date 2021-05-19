@@ -6,7 +6,7 @@ using FluentAssertions;
 using Xunit;
 using FV = FluentValidation;
 
-namespace AppCore.Validation.FluentValidation
+namespace AppCore.ModelValidation.FluentValidation
 {
     public class FluentValidationRegistrationTests
     {

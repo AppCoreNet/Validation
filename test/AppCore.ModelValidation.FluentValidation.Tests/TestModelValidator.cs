@@ -3,7 +3,7 @@
 
 using FluentValidation;
 
-namespace AppCore.Validation.FluentValidation
+namespace AppCore.ModelValidation.FluentValidation
 {
     public class TestModelValidator : AbstractValidator<TestModel>
     {

@@ -1,5 +1,5 @@
 // Licensed under the MIT License.
-// Copyright (c) 2018-2020 the AppCore .NET project.
+// Copyright (c) 2018-2021 the AppCore .NET project.
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AppCore.Diagnostics;
 
-namespace AppCore.Validation.DataAnnotations
+namespace AppCore.ModelValidation.DataAnnotations
 {
     /// <summary>
     /// Provides a <see cref="IValidator"/> which uses the <see cref="System.ComponentModel.DataAnnotations"/>.

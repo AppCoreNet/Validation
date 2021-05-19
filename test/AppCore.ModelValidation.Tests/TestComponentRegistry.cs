@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AppCore.DependencyInjection;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     public class TestComponentRegistry : IComponentRegistry, IEnumerable<ComponentRegistration>
     {

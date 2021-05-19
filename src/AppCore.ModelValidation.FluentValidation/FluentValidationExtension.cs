@@ -3,8 +3,8 @@
 
 using System;
 using AppCore.Diagnostics;
-using AppCore.Validation;
-using AppCore.Validation.FluentValidation;
+using AppCore.ModelValidation;
+using AppCore.ModelValidation.FluentValidation;
 using FV = FluentValidation;
 
 // ReSharper disable once CheckNamespace

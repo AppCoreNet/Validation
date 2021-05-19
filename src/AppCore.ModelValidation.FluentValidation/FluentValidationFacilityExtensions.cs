@@ -16,11 +16,11 @@ namespace AppCore.DependencyInjection
         /// <summary>
         /// Adds validation using FluentValidation.
         /// </summary>
-        /// <param name="facility">The <see cref="ValidationFacility"/>.</param>
+        /// <param name="facility">The <see cref="ModelValidationFacility"/>.</param>
         /// <param name="configure"></param>
-        /// <returns>The <see cref="ValidationFacility"/>.</returns>
-        public static ValidationFacility UseFluentValidation(
-            this ValidationFacility facility,
+        /// <returns>The <see cref="ModelValidationFacility"/>.</returns>
+        public static ModelValidationFacility UseFluentValidation(
+            this ModelValidationFacility facility,
             Action<FluentValidationExtension> configure = null)
         {
             Ensure.Arg.NotNull(facility, nameof(facility));

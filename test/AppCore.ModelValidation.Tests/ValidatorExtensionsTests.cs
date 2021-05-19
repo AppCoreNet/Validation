@@ -8,7 +8,7 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     public class ValidatorExtensionsTests
     {

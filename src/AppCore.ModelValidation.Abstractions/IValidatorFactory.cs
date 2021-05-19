@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     /// <summary>
     /// Represents a factory for creating instances of <see cref="IValidator"/>.

@@ -5,7 +5,7 @@ using System;
 using AppCore.Diagnostics;
 using FV = FluentValidation;
 
-namespace AppCore.Validation.FluentValidation
+namespace AppCore.ModelValidation.FluentValidation
 {
     /// <summary>
     /// Provides a <see cref="IValidatorProvider"/> which creates <see cref="FluentValidationValidator"/> instances.

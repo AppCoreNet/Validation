@@ -9,7 +9,7 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace AppCore.Validation.DataAnnotations
+namespace AppCore.ModelValidation.DataAnnotations
 {
     public class DataAnnotationsValidatorTests
     {

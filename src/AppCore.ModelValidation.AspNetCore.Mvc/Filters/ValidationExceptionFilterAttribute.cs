@@ -3,7 +3,7 @@
 
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace AppCore.Validation.AspNetCore.Mvc.Filters
+namespace AppCore.ModelValidation.AspNetCore.Mvc.Filters
 {
     /// <summary>
     /// An attribute which uses the <see cref="ValidationExceptionFilter"/>.

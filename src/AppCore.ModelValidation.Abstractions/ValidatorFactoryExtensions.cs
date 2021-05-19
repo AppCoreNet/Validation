@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     /// <summary>
     /// Provides extension methods for <see cref="IValidatorFactory"/>.

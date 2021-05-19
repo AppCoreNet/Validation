@@ -5,7 +5,7 @@ using AppCore.DependencyInjection;
 using FluentAssertions;
 using Xunit;
 
-namespace AppCore.Validation.DataAnnotations
+namespace AppCore.ModelValidation.DataAnnotations
 {
     public class DataAnnotationsRegistrationTests
     {

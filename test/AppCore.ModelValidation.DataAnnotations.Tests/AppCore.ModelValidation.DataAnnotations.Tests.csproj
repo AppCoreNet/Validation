@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.Validation.DataAnnotations\AppCore.ModelValidation.DataAnnotations.csproj" />
+    <ProjectReference Include="..\..\src\AppCore.ModelValidation.DataAnnotations\AppCore.ModelValidation.DataAnnotations.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">

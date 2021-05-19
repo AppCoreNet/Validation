@@ -1,8 +1,8 @@
 // Licensed under the MIT License.
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
-using AppCore.Validation;
-using AppCore.Validation.DataAnnotations;
+using AppCore.ModelValidation;
+using AppCore.ModelValidation.DataAnnotations;
 
 // ReSharper disable once CheckNamespace
 namespace AppCore.DependencyInjection.Facilities

@@ -5,7 +5,8 @@ using System;
 using FluentValidation;
 using FV = FluentValidation;
 
-namespace AppCore.Validation.FluentValidation
+// ReSharper disable once CheckNamespace
+namespace AppCore.ModelValidation.FluentValidation
 {
     internal sealed class ContainerValidatorFactory : ValidatorFactoryBase
     {

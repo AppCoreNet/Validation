@@ -4,7 +4,7 @@
 using System;
 using AppCore.Diagnostics;
 
-namespace AppCore.Validation
+namespace AppCore.ModelValidation
 {
     /// <summary>
     /// Represents a validation exception.

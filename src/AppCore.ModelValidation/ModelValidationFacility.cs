@@ -1,7 +1,7 @@
 // Licensed under the MIT License.
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
-using AppCore.Validation;
+using AppCore.ModelValidation;
 
 // ReSharper disable once CheckNamespace
 namespace AppCore.DependencyInjection.Facilities
@@ -9,7 +9,7 @@ namespace AppCore.DependencyInjection.Facilities
     /// <summary>
     /// Represents the validation facility.
     /// </summary>
-    public sealed class ValidationFacility : Facility
+    public sealed class ModelValidationFacility : Facility
     {
         /// <inheritdoc />
         protected override void Build(IComponentRegistry registry)
