@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <Description>Provides integration of  FluentValidation into AppCore .NET</Description>
+    <Description>Provides integration of FluentValidation into AppCore .NET</Description>
   </PropertyGroup>
 
   <ItemGroup>
