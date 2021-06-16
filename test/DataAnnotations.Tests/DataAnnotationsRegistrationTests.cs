@@ -1,26 +1,32 @@
 // Licensed under the MIT License.
 // Copyright (c) 2018-2020 the AppCore .NET project.
 
+using System.Collections.Generic;
 using AppCore.DependencyInjection;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace AppCore.ModelValidation.DataAnnotations
 {
     public class DataAnnotationsRegistrationTests
     {
+        private class ServiceCollection : List<ServiceDescriptor>, IServiceCollection
+        {
+        }
+
         [Fact]
         public void AddFluentValidationRegistersProvider()
         {
-            var registry = new TestComponentRegistry();
-            registry.AddModelValidation(v => v.UseDataAnnotations());
+            var services = new ServiceCollection();
+            services.AddModelValidation(v => v.UseDataAnnotations());
 
-            registry.Should()
+            services.Should()
                     .Contain(
-                        cr =>
-                            cr.ContractType == typeof(IValidatorProvider)
-                            && cr.ImplementationType == typeof(DataAnnotationsValidatorProvider)
-                            && cr.Lifetime == ComponentLifetime.Transient);
+                        sd =>
+                            sd.ServiceType == typeof(IValidatorProvider)
+                            && sd.ImplementationType == typeof(DataAnnotationsValidatorProvider)
+                            && sd.Lifetime == ServiceLifetime.Transient);
         }
     }
 }

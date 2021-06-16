@@ -1,8 +1,10 @@
 // Licensed under the MIT License.
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
+using System.Collections.Generic;
 using AppCore.DependencyInjection;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using FV = FluentValidation;
 
@@ -10,45 +12,49 @@ namespace AppCore.ModelValidation.FluentValidation
 {
     public class FluentValidationRegistrationTests
     {
+        private class ServiceCollection : List<ServiceDescriptor>, IServiceCollection
+        {
+        }
+
         [Fact]
         public void AddFluentValidationRegistersProvider()
         {
-            var registry = new TestComponentRegistry();
+            var services = new ServiceCollection();
 
-            registry.AddModelValidation(v => v.UseFluentValidation());
+            services.AddModelValidation(v => v.UseFluentValidation());
 
-            registry.Should()
+            services.Should()
                     .Contain(
-                        cr =>
-                            cr.ContractType == typeof(IValidatorProvider)
-                            && cr.ImplementationType == typeof(FluentValidationValidatorProvider)
-                            && cr.Lifetime == ComponentLifetime.Transient);
+                        sd =>
+                            sd.ServiceType == typeof(IValidatorProvider)
+                            && sd.ImplementationType == typeof(FluentValidationValidatorProvider)
+                            && sd.Lifetime == ServiceLifetime.Transient);
         }
 
         [Fact]
         public void AddValidatorRegistersValidator()
         {
-            var registry = new TestComponentRegistry();
+            var services = new ServiceCollection();
 
-            registry.AddModelValidation(
+            services.AddModelValidation(
                 v =>
                     v.UseFluentValidation(
                         f => f
                             .WithValidator<TestModelValidator>()));
 
-            registry.Should()
+            services.Should()
                     .Contain(
-                        cr =>
-                            cr.ContractType == typeof(FV.IValidator<TestModel>)
-                            && cr.Lifetime == ComponentLifetime.Transient);
+                        sd =>
+                            sd.ServiceType == typeof(FV.IValidator<TestModel>)
+                            && sd.Lifetime == ServiceLifetime.Transient);
         }
 
         [Fact]
         public void AddValidatorsRegistersValidator()
         {
-            var registry = new TestComponentRegistry();
+            var services = new ServiceCollection();
 
-            registry.AddModelValidation(
+            services.AddModelValidation(
                 v =>
                     v.UseFluentValidation(
                         f => f
@@ -60,11 +66,11 @@ namespace AppCore.ModelValidation.FluentValidation
                             )
                     ));
 
-            registry.Should()
+            services.Should()
                     .Contain(
-                        cr =>
-                            cr.ContractType == typeof(FV.IValidator<TestModel>)
-                            && cr.Lifetime == ComponentLifetime.Transient);
+                        sd =>
+                            sd.ServiceType == typeof(FV.IValidator<TestModel>)
+                            && sd.Lifetime == ServiceLifetime.Transient);
         }
     }
 }

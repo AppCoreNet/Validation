@@ -6,6 +6,8 @@ using AppCore.DependencyInjection;
 using AppCore.DependencyInjection.Facilities;
 using AppCore.Diagnostics;
 using AppCore.ModelValidation.FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using FV = FluentValidation;
 
 // ReSharper disable once CheckNamespace
@@ -17,12 +19,12 @@ namespace AppCore.ModelValidation
     public class FluentValidationFacilityExtension : FacilityExtension
     {
         /// <inheritdoc />
-        protected override void Build(IComponentRegistry registry)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            base.Build(registry);
+            base.ConfigureServices(services);
 
-            registry.TryAddEnumerable(ComponentRegistration.Transient<IValidatorProvider, FluentValidationValidatorProvider>());
-            registry.TryAdd(ComponentRegistration.Transient<FV.IValidatorFactory, ContainerValidatorFactory>());
+            services.TryAddEnumerable(ServiceDescriptor.Transient<IValidatorProvider, FluentValidationValidatorProvider>());
+            services.TryAddTransient<FV.IValidatorFactory, ContainerValidatorFactory>();
         }
 
         public FluentValidationFacilityExtension WithValidator<T>()
@@ -34,22 +36,23 @@ namespace AppCore.ModelValidation
         public FluentValidationFacilityExtension WithValidator(Type validatorType)
         {
             Ensure.Arg.NotNull(validatorType, nameof(validatorType));
+            Ensure.Arg.OfType(validatorType, typeof(FV.IValidator<>), nameof(validatorType));
 
             Type serviceType = validatorType.GetClosedTypeOf(typeof(FV.IValidator<>));
-            ConfigureRegistry(r => r.TryAdd(ComponentRegistration.Transient(serviceType, validatorType)));
+            AddCallback(r => r.TryAddTransient(serviceType, validatorType));
 
             return this;
         }
 
-        public FluentValidationFacilityExtension WithValidatorsFrom(Action<IComponentRegistrationSources> configure)
+        public FluentValidationFacilityExtension WithValidatorsFrom(Action<IServiceDescriptorReflectionBuilder> configure)
         {
             Ensure.Arg.NotNull(configure, nameof(configure));
 
-            ConfigureRegistry(r =>
+            AddCallback(r =>
             {
-                var sources = new ComponentRegistrationSources(typeof(FV.IValidator<>));
+                var sources = new ServiceDescriptorReflectionBuilder(typeof(FV.IValidator<>));
                 configure(sources);
-                r.TryAdd(sources.GetRegistrations());
+                r.TryAdd(sources.Resolve());
             });
             return this;
         }

@@ -1,8 +1,9 @@
 // Licensed under the MIT License.
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
-using AppCore.DependencyInjection;
 using AppCore.DependencyInjection.Facilities;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AppCore.ModelValidation
 {
@@ -12,15 +13,12 @@ namespace AppCore.ModelValidation
     public sealed class ModelValidationFacility : Facility
     {
         /// <inheritdoc />
-        protected override void Build(IComponentRegistry registry)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            base.Build(registry);
+            base.ConfigureServices(services);
 
-            registry.TryAdd(new[]
-            {
-                ComponentRegistration.Transient<IValidatorFactory, ValidatorFactory>(),
-                ComponentRegistration.Transient(typeof(IValidator<>), typeof(Validator<>))
-            });
+            services.TryAddTransient<IValidatorFactory, ValidatorFactory>();
+            services.TryAddTransient(typeof(IValidator<>), typeof(Validator<>));
         }
     }
 }

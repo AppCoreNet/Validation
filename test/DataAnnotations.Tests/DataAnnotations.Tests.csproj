@@ -13,6 +13,6 @@
 
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">
     <Reference Include="System.ComponentModel.DataAnnotations" />
-  </ItemGroup>  
-  
+  </ItemGroup>
+
 </Project>
