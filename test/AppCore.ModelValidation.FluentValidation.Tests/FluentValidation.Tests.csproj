@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net5</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' != 'Unix'">$(TargetFrameworks);net461</TargetFrameworks>    
+    <TargetFrameworks Condition="'$(OS)' != 'Unix'">$(TargetFrameworks);net461</TargetFrameworks>
     <RootNamespace>AppCore.ModelValidation.FluentValidation</RootNamespace>
+    <AssemblyName>AppCore.ModelValidation.FluentValidation.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.ModelValidation.FluentValidation\AppCore.ModelValidation.FluentValidation.csproj" />
+    <ProjectReference Include="..\..\src\AppCore.ModelValidation.FluentValidation\FluentValidation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net5</TargetFrameworks>
+    <RootNamespace>AppCore.ModelValidation.AspNetCore.Mvc</RootNamespace>
+    <AssemblyName>AppCore.ModelValidation.AspNetCore.Mvc</AssemblyName>
     <Description>Provides integration of AppCore .NET model validation into ASP.NET Core MVC.</Description>
   </PropertyGroup>
 
@@ -20,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppCore.ModelValidation.Abstractions\AppCore.ModelValidation.Abstractions.csproj" />
+    <ProjectReference Include="..\AppCore.ModelValidation.Abstractions\Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
