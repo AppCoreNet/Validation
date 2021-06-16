@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppCore.ModelValidation.Abstractions\Abstractions.csproj" />
+    <ProjectReference Include="..\Abstractions\Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

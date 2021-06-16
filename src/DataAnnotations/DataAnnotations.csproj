@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppCore.ModelValidation\ModelValidation.csproj" />
+    <ProjectReference Include="..\ModelValidation\ModelValidation.csproj" />
   </ItemGroup>
 
 </Project>

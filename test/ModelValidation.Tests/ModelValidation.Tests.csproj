@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.ModelValidation\ModelValidation.csproj" />
+    <ProjectReference Include="..\..\src\ModelValidation\ModelValidation.csproj" />
   </ItemGroup>
 
 </Project>

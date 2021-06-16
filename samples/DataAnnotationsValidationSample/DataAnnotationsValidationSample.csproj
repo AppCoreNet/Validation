@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.ModelValidation.DataAnnotations\AppCore.ModelValidation.DataAnnotations.csproj" />
+    <ProjectReference Include="..\..\src\DataAnnotations\DataAnnotations.csproj" />
   </ItemGroup>
 
 </Project>
