@@ -39,7 +39,7 @@ namespace AppCore.ModelValidation
             Ensure.Arg.OfType(validatorType, typeof(FV.IValidator<>), nameof(validatorType));
 
             Type serviceType = validatorType.GetClosedTypeOf(typeof(FV.IValidator<>));
-            AddCallback(r => r.TryAddTransient(serviceType, validatorType));
+            ConfigureServices(r => r.TryAddTransient(serviceType, validatorType));
 
             return this;
         }
@@ -48,11 +48,9 @@ namespace AppCore.ModelValidation
         {
             Ensure.Arg.NotNull(configure, nameof(configure));
 
-            AddCallback(r =>
+            ConfigureServices(s =>
             {
-                var sources = new ServiceDescriptorReflectionBuilder(typeof(FV.IValidator<>));
-                configure(sources);
-                r.TryAdd(sources.Resolve());
+                s.TryAddFrom(typeof(FV.IValidator<>), configure);
             });
             return this;
         }

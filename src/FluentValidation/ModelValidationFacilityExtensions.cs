@@ -3,10 +3,8 @@
 
 using System;
 using AppCore.Diagnostics;
-using AppCore.ModelValidation;
 
-// ReSharper disable once CheckNamespace
-namespace Microsoft.Extensions.DependencyInjection
+namespace AppCore.ModelValidation.FluentValidation
 {
     /// <summary>
     /// Provides extension methods to register FluentValidation.

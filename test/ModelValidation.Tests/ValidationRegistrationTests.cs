@@ -2,6 +2,7 @@
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
 using System.Collections.Generic;
+using AppCore.DependencyInjection;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -18,7 +19,7 @@ namespace AppCore.ModelValidation
         public void RegisterValidationFacilityRegistersComponents()
         {
             var services = new ServiceCollection();
-            services.AddModelValidation();
+            services.AddAppCore().AddModelValidation();
 
             services
                     .Should()

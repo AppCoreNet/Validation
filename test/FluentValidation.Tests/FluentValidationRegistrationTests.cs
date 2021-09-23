@@ -21,7 +21,7 @@ namespace AppCore.ModelValidation.FluentValidation
         {
             var services = new ServiceCollection();
 
-            services.AddModelValidation(v => v.UseFluentValidation());
+            services.AddAppCore().AddModelValidation(v => v.UseFluentValidation());
 
             services.Should()
                     .Contain(
@@ -36,7 +36,7 @@ namespace AppCore.ModelValidation.FluentValidation
         {
             var services = new ServiceCollection();
 
-            services.AddModelValidation(
+            services.AddAppCore().AddModelValidation(
                 v =>
                     v.UseFluentValidation(
                         f => f
@@ -54,7 +54,7 @@ namespace AppCore.ModelValidation.FluentValidation
         {
             var services = new ServiceCollection();
 
-            services.AddModelValidation(
+            services.AddAppCore().AddModelValidation(
                 v =>
                     v.UseFluentValidation(
                         f => f
