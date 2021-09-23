@@ -2,11 +2,12 @@
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
 using System;
-using AppCore.DependencyInjection;
 using AppCore.Diagnostics;
+using AppCore.ModelValidation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AppCore.ModelValidation
+// ReSharper disable once CheckNamespace
+namespace AppCore.DependencyInjection
 {
     /// <summary>
     /// Provides extension methods to register the <see cref="ModelValidationFacility"/>.
