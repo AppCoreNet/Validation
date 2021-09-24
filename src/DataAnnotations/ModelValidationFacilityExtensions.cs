@@ -2,8 +2,10 @@
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
 using AppCore.Diagnostics;
+using AppCore.ModelValidation;
 
-namespace AppCore.ModelValidation.DataAnnotations
+// ReSharper disable once CheckNamespace
+namespace AppCore.DependencyInjection
 {
     /// <summary>
     /// Provides extension methods to register data annotations validation.
