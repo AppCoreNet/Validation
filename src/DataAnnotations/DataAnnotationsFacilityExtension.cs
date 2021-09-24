@@ -2,12 +2,13 @@
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
 using AppCore.DependencyInjection.Facilities;
+using AppCore.ModelValidation;
 using AppCore.ModelValidation.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.ModelValidation
+namespace AppCore.DependencyInjection
 {
     internal class DataAnnotationsFacilityExtension : FacilityExtension
     {

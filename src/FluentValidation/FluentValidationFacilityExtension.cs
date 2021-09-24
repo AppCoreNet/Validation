@@ -2,16 +2,16 @@
 // Copyright (c) 2020-2021 the AppCore .NET project.
 
 using System;
-using AppCore.DependencyInjection;
 using AppCore.DependencyInjection.Facilities;
 using AppCore.Diagnostics;
+using AppCore.ModelValidation;
 using AppCore.ModelValidation.FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using FV = FluentValidation;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.ModelValidation
+namespace AppCore.DependencyInjection
 {
     /// <summary>
     /// Provides the FluentValidation extension.
