@@ -1,17 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AppCore.Validation.FluentValidation\AppCore.Validation.FluentValidation.csproj" />
+    <ProjectReference Include="..\..\src\FluentValidation\FluentValidation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AppCore.DependencyInjection.Microsoft.Extensions" Version="$(AppCore_DI_Version)" />
-    <PackageReference Include="AppCore.DependencyInjection.DependencyModelExtensions" Version="$(AppCore_DI_Version)" />
   </ItemGroup>
 
 </Project>

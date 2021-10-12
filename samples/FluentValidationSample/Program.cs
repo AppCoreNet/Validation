@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AppCore.DependencyInjection;
-using AppCore.Validation;
-using AppCore.DependencyInjection.Builder;
+using AppCore.DependencyInjection.Microsoft.Extensions;
+using AppCore.ModelValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FluentValidationSample
@@ -13,8 +13,9 @@ namespace FluentValidationSample
         static  async Task Main(string[] args)
         {
             var services = new ServiceCollection();
-            services.AddFacility<ValidationFacility>(
-                f => f.UseFluentValidation(r => r.AddFromDependencyContext()));
+            var registry = new MicrosoftComponentRegistry(services);
+            registry.AddModelValidation(
+                v => v.UseFluentValidation(fv => fv.WithValidator<PersonValidator>()));
 
             ServiceProvider sp = services.BuildServiceProvider();
             var validator = sp.GetRequiredService<IValidator<Person>>();
