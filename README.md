@@ -1,10 +1,10 @@
 AppCore .NET Validation
 -----------------------
 
-[![Build Status](https://dev.azure.com/AppCoreNet/Validation/_apis/build/status/AppCoreNet.Validation%20CI?branchName=dev)](https://dev.azure.com/AppCoreNet/Validation/_build/latest?definitionId=4&branchName=dev)
-![Azure DevOps tests (compact)](https://img.shields.io/azure-devops/tests/AppCoreNet/Validation/4?compact_message)
-![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/AppCoreNet/Validation/4/dev)
-![Nuget](https://img.shields.io/nuget/v/AppCore.Validation.Abstractions)
+[![Build Status](https://dev.azure.com/AppCoreNet/ModelValidation/_apis/build/status/AppCoreNet.Validation%20CI?branchName=dev)](https://dev.azure.com/AppCoreNet/ModelValidation/_build/latest?definitionId=4&branchName=dev)
+![Azure DevOps tests (compact)](https://img.shields.io/azure-devops/tests/AppCoreNet/ModelValidation/4?compact_message)
+![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/AppCoreNet/ModelValidation/4/dev)
+![Nuget](https://img.shields.io/nuget/v/AppCore.ModelValidation.Abstractions)
 
 This repository contains abstractions and implementations for model validation. It targets the .NET Framework and .NET Core.
 
@@ -28,7 +28,8 @@ Package                                           | Description
 This packages includes the default implementations. To configure validation in your application, register the facility:
 
 ```
-registry.AddModelValidation();
+services.AddAppCore()
+        .AddModelValidation();
 ```
 
 ### Abstractions
@@ -40,7 +41,8 @@ This packages includes the validation API for applications and providers.
 Adds support for using DataAnnotations.
 To use DataAnnotations configure the provider when registering the facility:
 ```
-registry.AddModelValidation(v => v.UseDataAnnotations());
+services.AddAppCore()
+        .AddModelValidation(v => v.UseDataAnnotations());
 ```
 
 ### FluentValidation
@@ -48,7 +50,8 @@ registry.AddModelValidation(v => v.UseDataAnnotations());
 Adds support for using FluentValidation.
 To use FluentValidation, configure the provider and add validators when registering the facility:
 ```
-registry.AddModelValidation(v => v.UseFluentValidation(fv => fv.WithValidator<MyValidator>()));
+services.AddAppCore()
+        .AddModelValidation(v => v.UseFluentValidation(fv => fv.WithValidator<MyValidator>()));
 ```
 
 ## Contributing
