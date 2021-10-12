@@ -1,7 +1,7 @@
 AppCore .NET Validation
 -----------------------
 
-[![Build Status](https://dev.azure.com/AppCoreNet/ModelValidation/_apis/build/status/AppCoreNet.Validation%20CI?branchName=dev)](https://dev.azure.com/AppCoreNet/ModelValidation/_build/latest?definitionId=4&branchName=dev)
+[![Build Status](https://dev.azure.com/AppCoreNet/ModelValidation/_apis/build/status/AppCoreNet.ModelValidation%20CI?branchName=dev)](https://dev.azure.com/AppCoreNet/ModelValidation/_build/latest?definitionId=4&branchName=dev)
 ![Azure DevOps tests (compact)](https://img.shields.io/azure-devops/tests/AppCoreNet/ModelValidation/4?compact_message)
 ![Azure DevOps coverage (branch)](https://img.shields.io/azure-devops/coverage/AppCoreNet/ModelValidation/4/dev)
 ![Nuget](https://img.shields.io/nuget/v/AppCore.ModelValidation.Abstractions)
