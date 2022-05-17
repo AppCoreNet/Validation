@@ -11,9 +11,11 @@ namespace AppCore.ModelValidation.DataAnnotations
 {
     public class DataAnnotationsRegistrationTests
     {
+        #nullable disable
         private class ServiceCollection : List<ServiceDescriptor>, IServiceCollection
         {
         }
+        #nullable restore
 
         [Fact]
         public void AddFluentValidationRegistersProvider()

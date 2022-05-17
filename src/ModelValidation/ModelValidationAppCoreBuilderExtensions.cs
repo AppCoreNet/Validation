@@ -21,7 +21,7 @@ namespace AppCore.DependencyInjection
         /// <returns>The <see cref="IAppCoreBuilder"/>.</returns>
         public static IAppCoreBuilder AddModelValidation(
             this IAppCoreBuilder builder,
-            Action<ModelValidationFacility> configure = null)
+            Action<ModelValidationFacility>? configure = null)
         {
             Ensure.Arg.NotNull(builder, nameof(builder));
             builder.Services.AddFacility(configure);

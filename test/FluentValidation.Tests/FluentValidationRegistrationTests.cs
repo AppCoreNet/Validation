@@ -12,9 +12,11 @@ namespace AppCore.ModelValidation.FluentValidation
 {
     public class FluentValidationRegistrationTests
     {
+        #nullable disable
         private class ServiceCollection : List<ServiceDescriptor>, IServiceCollection
         {
         }
+        #nullable restore
 
         [Fact]
         public void AddFluentValidationRegistersProvider()

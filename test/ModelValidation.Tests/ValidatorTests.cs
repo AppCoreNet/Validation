@@ -33,7 +33,7 @@ namespace AppCore.ModelValidation
                    .Returns(innerValidator);
 
             var validator = new Validator<string>(factory);
-            var obj = "abc";
+            string obj = "abc";
             var cancellationToken = new CancellationToken();
 
             await validator.ValidateAsync(obj, cancellationToken);

@@ -11,9 +11,11 @@ namespace AppCore.ModelValidation
 {
     public class ValidationRegistrationTests
     {
+        #nullable disable
         private class ServiceCollection : List<ServiceDescriptor>, IServiceCollection
         {
         }
+        #nullable restore
 
         [Fact]
         public void RegisterValidationFacilityRegistersComponents()

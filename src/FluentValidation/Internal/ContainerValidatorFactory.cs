@@ -17,7 +17,7 @@ namespace AppCore.ModelValidation.FluentValidation
             _container = container;
         }
 
-        public override FV.IValidator CreateInstance(Type validatorType)
+        public override FV.IValidator? CreateInstance(Type validatorType)
         {
             return _container.GetService(validatorType) as FV.IValidator;
         }

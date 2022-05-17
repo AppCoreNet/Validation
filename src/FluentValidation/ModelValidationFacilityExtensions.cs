@@ -21,7 +21,7 @@ namespace AppCore.DependencyInjection
         /// <returns>The <see cref="ModelValidationFacility"/>.</returns>
         public static ModelValidationFacility UseFluentValidation(
             this ModelValidationFacility facility,
-            Action<FluentValidationFacilityExtension> configure = null)
+            Action<FluentValidationFacilityExtension>? configure = null)
         {
             Ensure.Arg.NotNull(facility, nameof(facility));
             facility.AddExtension(configure);

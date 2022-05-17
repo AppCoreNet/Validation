@@ -24,12 +24,15 @@ namespace AppCore.ModelValidation.DataAnnotations
 
             result.Errors.Should()
                   .BeEquivalentTo(
-                      new ValidationError(
-                          nameof(TestModel.Value1),
-                          $"The {nameof(TestModel.Value1)} field is required."),
-                      new ValidationError(
-                          nameof(TestModel.Value2),
-                          $"The {nameof(TestModel.Value2)} field is required."));
+                      new[]
+                      {
+                          new ValidationError(
+                              nameof(TestModel.Value1),
+                              $"The {nameof(TestModel.Value1)} field is required."),
+                          new ValidationError(
+                              nameof(TestModel.Value2),
+                              $"The {nameof(TestModel.Value2)} field is required.")
+                      });
         }
     }
 }

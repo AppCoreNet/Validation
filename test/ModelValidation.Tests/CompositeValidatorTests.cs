@@ -25,7 +25,7 @@ namespace AppCore.ModelValidation
 
             var compositeValidator = new CompositeValidator(new []{validator1, validator2});
 
-            var obj = "abc";
+            string obj = "abc";
             var ct = new CancellationToken();
             await compositeValidator.ValidateAsync(obj, ct);
 
@@ -53,11 +53,11 @@ namespace AppCore.ModelValidation
 
             var compositeValidator = new CompositeValidator(new []{validator1, validator2});
 
-            var obj = "abc";
+            string obj = "abc";
             ValidationResult result = await compositeValidator.ValidateAsync(obj, CancellationToken.None);
 
             result.Errors.Should()
-                  .BeEquivalentTo(error1, error2);
+                  .BeEquivalentTo(new [] { error1, error2 });
         }
     }
 }

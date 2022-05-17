@@ -5,8 +5,8 @@ namespace AppCore.ModelValidation.FluentValidation
 {
     public class TestModel
     {
-        public string Value1 { get; set; }
+        public string? Value1 { get; set; }
 
-        public string Value2 { get; set; }
+        public string? Value2 { get; set; }
     }
 }

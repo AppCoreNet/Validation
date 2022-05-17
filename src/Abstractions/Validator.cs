@@ -23,13 +23,14 @@ namespace AppCore.ModelValidation
         /// <exception cref="ArgumentNullException">Argument <paramref name="factory"/> must not be <c>null</c>.</exception>
         public Validator(IValidatorFactory factory)
         {
-            Ensure.Arg.NotNull(factory, nameof(factory));
+            Ensure.Arg.NotNull(factory);
             _validator = factory.CreateValidator(typeof(T));
         }
 
         /// <inheritdoc />
         public async ValueTask<ValidationResult> ValidateAsync(T model, CancellationToken cancellationToken)
         {
+            Ensure.Arg.NotNull(model);
             return await _validator.ValidateAsync(model, cancellationToken);
         }
     }
