@@ -23,7 +23,7 @@ namespace AppCore.ModelValidation.FluentValidation
         {
             var services = new ServiceCollection();
 
-            services.AddAppCore().AddModelValidation(v => v.UseFluentValidation());
+            services.AddAppCore().AddModelValidation(v => v.AddFluentValidation());
 
             services.Should()
                     .Contain(
@@ -40,9 +40,9 @@ namespace AppCore.ModelValidation.FluentValidation
 
             services.AddAppCore().AddModelValidation(
                 v =>
-                    v.UseFluentValidation(
+                    v.AddFluentValidation(
                         f => f
-                            .WithValidator<TestModelValidator>()));
+                            .AddValidator<TestModelValidator>()));
 
             services.Should()
                     .Contain(
@@ -58,9 +58,9 @@ namespace AppCore.ModelValidation.FluentValidation
 
             services.AddAppCore().AddModelValidation(
                 v =>
-                    v.UseFluentValidation(
+                    v.AddFluentValidation(
                         f => f
-                            .WithValidatorsFrom(
+                            .AddValidatorsFrom(
                                 s => s.Assemblies(
                                     a => a
                                          .ClearDefaultFilters()

@@ -21,7 +21,7 @@ namespace AppCore.ModelValidation.DataAnnotations
         public void AddFluentValidationRegistersProvider()
         {
             var services = new ServiceCollection();
-            services.AddAppCore().AddModelValidation(v => v.UseDataAnnotations());
+            services.AddAppCore().AddModelValidation(v => v.AddDataAnnotations());
 
             services.Should()
                     .Contain(
