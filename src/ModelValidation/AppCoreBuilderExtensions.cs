@@ -19,21 +19,16 @@ namespace AppCore.DependencyInjection
         /// Adds the model validation services to the <see cref="IServiceCollection"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IAppCoreBuilder"/>.</param>
-        /// <param name="configure">The configuration delegate.</param>
-        /// <returns>The <see cref="IAppCoreBuilder"/>.</returns>
-        public static IAppCoreBuilder AddModelValidation(
-            this IAppCoreBuilder builder,
-            Action<IModelValidationBuilder>? configure = null)
+        /// <returns>The <see cref="IModelValidationBuilder"/>.</returns>
+        public static IModelValidationBuilder AddModelValidation(this IAppCoreBuilder builder)
         {
-            Ensure.Arg.NotNull(builder, nameof(builder));
+            Ensure.Arg.NotNull(builder);
 
             IServiceCollection services = builder.Services;
             services.TryAddTransient<IValidatorFactory, ValidatorFactory>();
             services.TryAddTransient(typeof(IValidator<>), typeof(Validator<>));
 
-            configure?.Invoke(new ModelValidationBuilder(services));
-
-            return builder;
+            return new ModelValidationBuilder(services);
         }
     }
 }
