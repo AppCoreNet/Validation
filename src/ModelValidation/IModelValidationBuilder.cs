@@ -5,17 +5,16 @@ using System.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Extensions.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection;
+
+/// <summary>
+/// Model validation builder.
+/// </summary>
+public interface IModelValidationBuilder
 {
     /// <summary>
-    /// Model validation builder.
+    /// The <see cref="IServiceCollection"/>.
     /// </summary>
-    public interface IModelValidationBuilder
-    {
-        /// <summary>
-        /// The <see cref="IServiceCollection"/>.
-        /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        IServiceCollection Services { get; }
-    }
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    IServiceCollection Services { get; }
 }

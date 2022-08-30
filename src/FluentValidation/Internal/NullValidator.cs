@@ -5,15 +5,14 @@ using System.Threading;
 using System.Threading.Tasks;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.ModelValidation.FluentValidation
-{
-    internal class NullValidator : IValidator
-    {
-        public static readonly NullValidator Instance = new NullValidator();
+namespace AppCore.ModelValidation.FluentValidation;
 
-        public ValueTask<ValidationResult> ValidateAsync(object model, CancellationToken cancellationToken = default)
-        {
-            return new ValueTask<ValidationResult>(ValidationResult.Success);
-        }
+internal class NullValidator : IValidator
+{
+    public static readonly NullValidator Instance = new NullValidator();
+
+    public ValueTask<ValidationResult> ValidateAsync(object model, CancellationToken cancellationToken = default)
+    {
+        return new ValueTask<ValidationResult>(ValidationResult.Success);
     }
 }

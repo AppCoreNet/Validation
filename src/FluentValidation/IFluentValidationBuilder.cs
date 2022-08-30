@@ -4,16 +4,15 @@
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Extensions.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection;
+
+/// <summary>
+/// FluentValidation builder.
+/// </summary>
+public interface IFluentValidationBuilder
 {
     /// <summary>
-    /// FluentValidation builder.
+    /// The <see cref="IServiceCollection"/>.
     /// </summary>
-    public interface IFluentValidationBuilder
-    {
-        /// <summary>
-        /// The <see cref="IServiceCollection"/>.
-        /// </summary>
-        IServiceCollection Services { get; }
-    }
+    IServiceCollection Services { get; }
 }

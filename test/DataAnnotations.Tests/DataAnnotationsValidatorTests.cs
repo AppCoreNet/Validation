@@ -9,30 +9,29 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace AppCore.ModelValidation.DataAnnotations
+namespace AppCore.ModelValidation.DataAnnotations;
+
+public class DataAnnotationsValidatorTests
 {
-    public class DataAnnotationsValidatorTests
+    [Fact]
+    public async Task ValidateReturnsValidationResult()
     {
-        [Fact]
-        public async Task ValidateReturnsValidationResult()
-        {
-            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+        CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+        CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
 
-            var validator = new DataAnnotationsValidator(Substitute.For<IServiceProvider>());
-            ValidationResult result = await validator.ValidateAsync(new TestModel(), CancellationToken.None);
+        var validator = new DataAnnotationsValidator(Substitute.For<IServiceProvider>());
+        ValidationResult result = await validator.ValidateAsync(new TestModel(), CancellationToken.None);
 
-            result.Errors.Should()
-                  .BeEquivalentTo(
-                      new[]
-                      {
-                          new ValidationError(
-                              nameof(TestModel.Value1),
-                              $"The {nameof(TestModel.Value1)} field is required."),
-                          new ValidationError(
-                              nameof(TestModel.Value2),
-                              $"The {nameof(TestModel.Value2)} field is required.")
-                      });
-        }
+        result.Errors.Should()
+              .BeEquivalentTo(
+                  new[]
+                  {
+                      new ValidationError(
+                          nameof(TestModel.Value1),
+                          $"The {nameof(TestModel.Value1)} field is required."),
+                      new ValidationError(
+                          nameof(TestModel.Value2),
+                          $"The {nameof(TestModel.Value2)} field is required.")
+                  });
     }
 }

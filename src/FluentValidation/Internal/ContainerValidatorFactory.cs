@@ -6,20 +6,19 @@ using FluentValidation;
 using FV = FluentValidation;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.ModelValidation.FluentValidation
+namespace AppCore.ModelValidation.FluentValidation;
+
+internal sealed class ContainerValidatorFactory : ValidatorFactoryBase
 {
-    internal sealed class ContainerValidatorFactory : ValidatorFactoryBase
+    private readonly IServiceProvider _container;
+
+    public ContainerValidatorFactory(IServiceProvider container)
     {
-        private readonly IServiceProvider _container;
+        _container = container;
+    }
 
-        public ContainerValidatorFactory(IServiceProvider container)
-        {
-            _container = container;
-        }
-
-        public override FV.IValidator? CreateInstance(Type validatorType)
-        {
-            return _container.GetService(validatorType) as FV.IValidator;
-        }
+    public override FV.IValidator? CreateInstance(Type validatorType)
+    {
+        return _container.GetService(validatorType) as FV.IValidator;
     }
 }

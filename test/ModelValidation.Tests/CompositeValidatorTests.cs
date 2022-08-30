@@ -8,56 +8,55 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace AppCore.ModelValidation
+namespace AppCore.ModelValidation;
+
+public class CompositeValidatorTests
 {
-    public class CompositeValidatorTests
+    [Fact]
+    public async Task ValidateInvokesAllValidators()
     {
-        [Fact]
-        public async Task ValidateInvokesAllValidators()
-        {
-            var validator1 = Substitute.For<IValidator>();
-            validator1.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
-                      .Returns(new ValidationResult(Enumerable.Empty<ValidationError>()));
+        var validator1 = Substitute.For<IValidator>();
+        validator1.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
+                  .Returns(new ValidationResult(Enumerable.Empty<ValidationError>()));
 
-            var validator2 = Substitute.For<IValidator>();
-            validator2.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
-                      .Returns(new ValidationResult(Enumerable.Empty<ValidationError>()));
+        var validator2 = Substitute.For<IValidator>();
+        validator2.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
+                  .Returns(new ValidationResult(Enumerable.Empty<ValidationError>()));
 
-            var compositeValidator = new CompositeValidator(new []{validator1, validator2});
+        var compositeValidator = new CompositeValidator(new []{validator1, validator2});
 
-            string obj = "abc";
-            var ct = new CancellationToken();
-            await compositeValidator.ValidateAsync(obj, ct);
+        string obj = "abc";
+        var ct = new CancellationToken();
+        await compositeValidator.ValidateAsync(obj, ct);
 
-            await validator1.Received(1)
-                            .ValidateAsync(obj, ct);
+        await validator1.Received(1)
+                        .ValidateAsync(obj, ct);
 
-            await validator2.Received(1)
-                            .ValidateAsync(obj, ct);
-        }
+        await validator2.Received(1)
+                        .ValidateAsync(obj, ct);
+    }
 
-        [Fact]
-        public async Task ValidateCombinesResults()
-        {
-            var validator1 = Substitute.For<IValidator>();
-            var error1 = new ValidationError("property", "error");
+    [Fact]
+    public async Task ValidateCombinesResults()
+    {
+        var validator1 = Substitute.For<IValidator>();
+        var error1 = new ValidationError("property", "error");
 
-            validator1.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
-                      .Returns(new ValidationResult(new[] {error1}));
+        validator1.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
+                  .Returns(new ValidationResult(new[] {error1}));
 
-            var validator2 = Substitute.For<IValidator>();
-            var error2 = new ValidationError("property", "error");
+        var validator2 = Substitute.For<IValidator>();
+        var error2 = new ValidationError("property", "error");
 
-            validator2.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
-                      .Returns(new ValidationResult(new[] {error2}));
+        validator2.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
+                  .Returns(new ValidationResult(new[] {error2}));
 
-            var compositeValidator = new CompositeValidator(new []{validator1, validator2});
+        var compositeValidator = new CompositeValidator(new []{validator1, validator2});
 
-            string obj = "abc";
-            ValidationResult result = await compositeValidator.ValidateAsync(obj, CancellationToken.None);
+        string obj = "abc";
+        ValidationResult result = await compositeValidator.ValidateAsync(obj, CancellationToken.None);
 
-            result.Errors.Should()
-                  .BeEquivalentTo(new [] { error1, error2 });
-        }
+        result.Errors.Should()
+              .BeEquivalentTo(new [] { error1, error2 });
     }
 }

@@ -3,22 +3,21 @@
 
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace AppCore.ModelValidation.AspNetCore.Mvc.Filters
-{
-    /// <summary>
-    /// An attribute which uses the <see cref="ValidationExceptionFilter"/>.
-    /// </summary>
-    public class ValidationExceptionFilterAttribute : ExceptionFilterAttribute
-    {
-        private static readonly ValidationExceptionFilter Filter = new ValidationExceptionFilter();
+namespace AppCore.ModelValidation.AspNetCore.Mvc.Filters;
 
-        /// <summary>
-        /// See <see cref="ValidationExceptionFilter.OnException"/>.
-        /// </summary>
-        /// <param name="context">The exception context.</param>
-        public override void OnException(ExceptionContext context)
-        {
-            Filter.OnException(context);
-        }
+/// <summary>
+/// An attribute which uses the <see cref="ValidationExceptionFilter"/>.
+/// </summary>
+public class ValidationExceptionFilterAttribute : ExceptionFilterAttribute
+{
+    private static readonly ValidationExceptionFilter Filter = new ValidationExceptionFilter();
+
+    /// <summary>
+    /// See <see cref="ValidationExceptionFilter.OnException"/>.
+    /// </summary>
+    /// <param name="context">The exception context.</param>
+    public override void OnException(ExceptionContext context)
+    {
+        Filter.OnException(context);
     }
 }

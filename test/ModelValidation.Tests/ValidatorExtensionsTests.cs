@@ -8,64 +8,63 @@ using FluentAssertions;
 using NSubstitute;
 using Xunit;
 
-namespace AppCore.ModelValidation
+namespace AppCore.ModelValidation;
+
+public class ValidatorExtensionsTests
 {
-    public class ValidatorExtensionsTests
+    [Fact]
+    public async Task ValidatesOfTAndThrowsIfNotValid()
     {
-        [Fact]
-        public async Task ValidatesOfTAndThrowsIfNotValid()
-        {
-            var validator = Substitute.For<IValidator<string>>();
-            validator.ValidateAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
-                     .Returns(ValidationResultFactory.Create());
+        var validator = Substitute.For<IValidator<string>>();
+        validator.ValidateAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
+                 .Returns(ValidationResultFactory.Create());
 
-            Func<Task> test = () => validator
-                                    .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
-                                    .AsTask();
-            await test.Should()
-                      .ThrowAsync<ValidationException>();
-        }
+        Func<Task> test = () => validator
+                                .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
+                                .AsTask();
+        await test.Should()
+                  .ThrowAsync<ValidationException>();
+    }
 
-        [Fact]
-        public async Task ValidatesAndThrowsIfNotValid()
-        {
-            var validator = Substitute.For<IValidator>();
-            validator.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
-                     .Returns(ValidationResultFactory.Create());
+    [Fact]
+    public async Task ValidatesAndThrowsIfNotValid()
+    {
+        var validator = Substitute.For<IValidator>();
+        validator.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
+                 .Returns(ValidationResultFactory.Create());
 
-            Func<Task> test = () => validator
-                                    .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
-                                    .AsTask();
-            await test.Should()
-                      .ThrowAsync<ValidationException>();
-        }
+        Func<Task> test = () => validator
+                                .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
+                                .AsTask();
+        await test.Should()
+                  .ThrowAsync<ValidationException>();
+    }
 
-        [Fact]
-        public async Task ValidatesOfTAndDoesNotThrowIfValid()
-        {
-            var validator = Substitute.For<IValidator<string>>();
-            validator.ValidateAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
-                     .Returns(ValidationResultFactory.Create(ValidationErrorSeverity.Info));
+    [Fact]
+    public async Task ValidatesOfTAndDoesNotThrowIfValid()
+    {
+        var validator = Substitute.For<IValidator<string>>();
+        validator.ValidateAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
+                 .Returns(ValidationResultFactory.Create(ValidationErrorSeverity.Info));
 
-            Func<Task> test = () => validator
-                                    .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
-                                    .AsTask();
-            await test.Should()
-                      .NotThrowAsync();
-        }
+        Func<Task> test = () => validator
+                                .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
+                                .AsTask();
+        await test.Should()
+                  .NotThrowAsync();
+    }
 
-        [Fact]
-        public async Task ValidatesAndDoesNotThrowIfValid()
-        {
-            var validator = Substitute.For<IValidator>();
-            validator.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
-                     .Returns(ValidationResultFactory.Create(ValidationErrorSeverity.Info));
+    [Fact]
+    public async Task ValidatesAndDoesNotThrowIfValid()
+    {
+        var validator = Substitute.For<IValidator>();
+        validator.ValidateAsync(Arg.Any<object>(), Arg.Any<CancellationToken>())
+                 .Returns(ValidationResultFactory.Create(ValidationErrorSeverity.Info));
 
-            Func<Task> test = () => validator
-                                    .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
-                                    .AsTask();
-            await test.Should()
-                      .NotThrowAsync();
-        }
+        Func<Task> test = () => validator
+                                .ValidateAndThrowAsync("abc", ValidationErrorSeverity.Error, CancellationToken.None)
+                                .AsTask();
+        await test.Should()
+                  .NotThrowAsync();
     }
 }

@@ -3,20 +3,19 @@
 
 using FluentValidation;
 
-namespace AppCore.ModelValidation.FluentValidation
-{
-    public class TestModelValidator : AbstractValidator<TestModel>
-    {
-        public TestModelValidator()
-        {
-            RuleFor(m => m.Value1)
-                .NotEmpty()
-                .WithMessage($"The {nameof(TestModel.Value1)} field is required.");
+namespace AppCore.ModelValidation.FluentValidation;
 
-            RuleFor(m => m.Value2)
-                .NotEmpty()
-                .WithSeverity(Severity.Warning)
-                .WithMessage($"The {nameof(TestModel.Value2)} field is required.");
-        }
+public class TestModelValidator : AbstractValidator<TestModel>
+{
+    public TestModelValidator()
+    {
+        RuleFor(m => m.Value1)
+            .NotEmpty()
+            .WithMessage($"The {nameof(TestModel.Value1)} field is required.");
+
+        RuleFor(m => m.Value2)
+            .NotEmpty()
+            .WithSeverity(Severity.Warning)
+            .WithMessage($"The {nameof(TestModel.Value2)} field is required.");
     }
 }

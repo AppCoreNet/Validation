@@ -9,28 +9,27 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using FV = FluentValidation;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Extensions.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection;
+
+/// <summary>
+/// Provides extension methods to register FluentValidation.
+/// </summary>
+public static class ModelValidationBuilderExtensions
 {
     /// <summary>
-    /// Provides extension methods to register FluentValidation.
+    /// Adds validation using FluentValidation.
     /// </summary>
-    public static class ModelValidationBuilderExtensions
+    /// <param name="builder">The <see cref="IModelValidationBuilder"/>.</param>
+    /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
+    public static IFluentValidationBuilder AddFluentValidation(this IModelValidationBuilder builder)
     {
-        /// <summary>
-        /// Adds validation using FluentValidation.
-        /// </summary>
-        /// <param name="builder">The <see cref="IModelValidationBuilder"/>.</param>
-        /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
-        public static IFluentValidationBuilder AddFluentValidation(this IModelValidationBuilder builder)
-        {
-            Ensure.Arg.NotNull(builder, nameof(builder));
+        Ensure.Arg.NotNull(builder);
 
-            IServiceCollection services = builder.Services;
+        IServiceCollection services = builder.Services;
 
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IValidatorProvider, FluentValidationValidatorProvider>());
-            services.TryAddTransient<FV.IValidatorFactory, ContainerValidatorFactory>();
+        services.TryAddEnumerable(ServiceDescriptor.Transient<IValidatorProvider, FluentValidationValidatorProvider>());
+        services.TryAddTransient<FV.IValidatorFactory, ContainerValidatorFactory>();
 
-            return new FluentValidationBuilder(services);
-        }
+        return new FluentValidationBuilder(services);
     }
 }

@@ -7,39 +7,38 @@ using System.Threading.Tasks;
 using NSubstitute;
 using Xunit;
 
-namespace AppCore.ModelValidation
+namespace AppCore.ModelValidation;
+
+public class ValidatorTests
 {
-    public class ValidatorTests
+    [Fact]
+    public void CtorCreatesValidatorWithSpecifiedType()
     {
-        [Fact]
-        public void CtorCreatesValidatorWithSpecifiedType()
-        {
-            var factory = Substitute.For<IValidatorFactory>();
+        var factory = Substitute.For<IValidatorFactory>();
 
-            Type objType = typeof(string);
-            var validator = new Validator<string>(factory);
+        Type objType = typeof(string);
+        var validator = new Validator<string>(factory);
 
-            factory.Received(1)
-                   .CreateValidator(objType);
-        }
+        factory.Received(1)
+               .CreateValidator(objType);
+    }
 
-        [Fact]
-        public async Task ValidateInvokesInnerValidator()
-        {
-            var innerValidator = Substitute.For<IValidator>();
+    [Fact]
+    public async Task ValidateInvokesInnerValidator()
+    {
+        var innerValidator = Substitute.For<IValidator>();
 
-            var factory = Substitute.For<IValidatorFactory>();
-            factory.CreateValidator(Arg.Any<Type>())
-                   .Returns(innerValidator);
+        var factory = Substitute.For<IValidatorFactory>();
+        factory.CreateValidator(Arg.Any<Type>())
+               .Returns(innerValidator);
 
-            var validator = new Validator<string>(factory);
-            string obj = "abc";
-            var cancellationToken = new CancellationToken();
+        var validator = new Validator<string>(factory);
+        string obj = "abc";
+        var cancellationToken = new CancellationToken();
 
-            await validator.ValidateAsync(obj, cancellationToken);
+        await validator.ValidateAsync(obj, cancellationToken);
 
-            await innerValidator.Received(1)
-                                .ValidateAsync(obj, cancellationToken);
-        }
+        await innerValidator.Received(1)
+                            .ValidateAsync(obj, cancellationToken);
     }
 }

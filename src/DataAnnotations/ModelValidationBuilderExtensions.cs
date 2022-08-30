@@ -8,28 +8,27 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Extensions.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection;
+
+/// <summary>
+/// Provides extension methods to register data annotations validation.
+/// </summary>
+public static class ModelValidationBuilderExtensions
 {
     /// <summary>
-    /// Provides extension methods to register data annotations validation.
+    /// Adds validation using <see cref="System.ComponentModel.DataAnnotations"/>.
     /// </summary>
-    public static class ModelValidationBuilderExtensions
+    /// <param name="builder">The <see cref="IModelValidationBuilder"/>.</param>
+    /// <returns>The <see cref="IModelValidationBuilder"/>.</returns>
+    public static IModelValidationBuilder AddDataAnnotations(this IModelValidationBuilder builder)
     {
-        /// <summary>
-        /// Adds validation using <see cref="System.ComponentModel.DataAnnotations"/>.
-        /// </summary>
-        /// <param name="builder">The <see cref="IModelValidationBuilder"/>.</param>
-        /// <returns>The <see cref="IModelValidationBuilder"/>.</returns>
-        public static IModelValidationBuilder AddDataAnnotations(this IModelValidationBuilder builder)
-        {
-            Ensure.Arg.NotNull(builder, nameof(builder));
+        Ensure.Arg.NotNull(builder);
 
-            IServiceCollection services = builder.Services;
+        IServiceCollection services = builder.Services;
 
-            services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IValidatorProvider, DataAnnotationsValidatorProvider>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Transient<IValidatorProvider, DataAnnotationsValidatorProvider>());
 
-            return builder;
-        }
+        return builder;
     }
 }

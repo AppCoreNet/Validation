@@ -8,55 +8,54 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using FV = FluentValidation;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.Extensions.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection;
+
+/// <summary>
+/// Provides extension methods for <see cref="IFluentValidationBuilder"/>.
+/// </summary>
+public static class FluentValidationBuilderExtensions
 {
     /// <summary>
-    /// Provides extension methods for <see cref="IFluentValidationBuilder"/>.
+    /// Adds a validator of the specified <typeparamref name="T"/> to the DI container.
     /// </summary>
-    public static class FluentValidationBuilderExtensions
+    /// <param name="builder">The <see cref="IFluentValidationBuilder"/>.</param>
+    /// <typeparam name="T">The type of the validator.</typeparam>
+    /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
+    public static IFluentValidationBuilder AddValidator<T>(this IFluentValidationBuilder builder)
+        where T : FV.IValidator
     {
-        /// <summary>
-        /// Adds a validator of the specified <typeparamref name="T"/> to the DI container.
-        /// </summary>
-        /// <param name="builder">The <see cref="IFluentValidationBuilder"/>.</param>
-        /// <typeparam name="T">The type of the validator.</typeparam>
-        /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
-        public static IFluentValidationBuilder AddValidator<T>(this IFluentValidationBuilder builder)
-            where T : FV.IValidator
-        {
-            return AddValidator(builder, typeof(T));
-        }
+        return AddValidator(builder, typeof(T));
+    }
 
-        /// <summary>
-        /// Adds a validator of the specified <paramref name="validatorType"/> to the DI container.
-        /// </summary>
-        /// <param name="builder">The <see cref="IFluentValidationBuilder"/>.</param>
-        /// <param name="validatorType">The type of the validator.</param>
-        /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
-        public static IFluentValidationBuilder AddValidator(this IFluentValidationBuilder builder, Type validatorType)
-        {
-            Ensure.Arg.NotNull(builder, nameof(builder));
-            Ensure.Arg.NotNull(validatorType, nameof(validatorType));
-            Ensure.Arg.OfType(validatorType, typeof(FV.IValidator<>), nameof(validatorType));
+    /// <summary>
+    /// Adds a validator of the specified <paramref name="validatorType"/> to the DI container.
+    /// </summary>
+    /// <param name="builder">The <see cref="IFluentValidationBuilder"/>.</param>
+    /// <param name="validatorType">The type of the validator.</param>
+    /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
+    public static IFluentValidationBuilder AddValidator(this IFluentValidationBuilder builder, Type validatorType)
+    {
+        Ensure.Arg.NotNull(builder);
+        Ensure.Arg.NotNull(validatorType);
+        Ensure.Arg.OfType(validatorType, typeof(FV.IValidator<>));
 
-            Type serviceType = validatorType.GetClosedTypeOf(typeof(FV.IValidator<>));
-            builder.Services.TryAddTransient(serviceType, validatorType);
-            return builder;
-        }
+        Type serviceType = validatorType.GetClosedTypeOf(typeof(FV.IValidator<>));
+        builder.Services.TryAddTransient(serviceType, validatorType);
+        return builder;
+    }
 
-        /// <summary>
-        /// Adds validators to the DI container by dynamically resolving them.
-        /// </summary>
-        /// <param name="builder">The <see cref="IFluentValidationBuilder"/>.</param>
-        /// <param name="configure">The configuration delegate.</param>
-        /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
-        public static IFluentValidationBuilder AddValidatorsFrom(this IFluentValidationBuilder builder, Action<IServiceDescriptorReflectionBuilder> configure)
-        {
-            Ensure.Arg.NotNull(builder, nameof(builder));
-            Ensure.Arg.NotNull(configure, nameof(configure));
+    /// <summary>
+    /// Adds validators to the DI container by dynamically resolving them.
+    /// </summary>
+    /// <param name="builder">The <see cref="IFluentValidationBuilder"/>.</param>
+    /// <param name="configure">The configuration delegate.</param>
+    /// <returns>The <see cref="IFluentValidationBuilder"/>.</returns>
+    public static IFluentValidationBuilder AddValidatorsFrom(this IFluentValidationBuilder builder, Action<IServiceDescriptorReflectionBuilder> configure)
+    {
+        Ensure.Arg.NotNull(builder);
+        Ensure.Arg.NotNull(configure);
 
-            builder.Services.TryAddFrom(typeof(FV.IValidator<>), configure);
-            return builder;
-        }
+        builder.Services.TryAddFrom(typeof(FV.IValidator<>), configure);
+        return builder;
     }
 }
