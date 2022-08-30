@@ -3,19 +3,18 @@
 
 using System;
 
-namespace AppCore.ModelValidation
+namespace AppCore.ModelValidation;
+
+/// <summary>
+/// Provides an implementation of <see cref="IValidator"/>.
+/// </summary>
+public interface IValidatorProvider
 {
     /// <summary>
-    /// Provides an implementation of <see cref="IValidator"/>.
+    /// Creates a <see cref="IValidator"/> implementation which can be used to validate objects
+    /// of the given type.
     /// </summary>
-    public interface IValidatorProvider
-    {
-        /// <summary>
-        /// Creates a <see cref="IValidator"/> implementation which can be used to validate objects
-        /// of the given type.
-        /// </summary>
-        /// <param name="modelType">The type of the object which will be validated.</param>
-        /// <returns>A reference to the <see cref="IValidator"/>.</returns>
-        IValidator CreateValidator(Type modelType);
-    }
+    /// <param name="modelType">The type of the object which will be validated.</param>
+    /// <returns>A reference to the <see cref="IValidator"/>.</returns>
+    IValidator CreateValidator(Type modelType);
 }

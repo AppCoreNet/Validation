@@ -3,14 +3,13 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace AppCore.ModelValidation.DataAnnotations
-{
-    public class TestModel
-    {
-        [Required]
-        public string Value1 { get; set; }
+namespace AppCore.ModelValidation.DataAnnotations;
 
-        [Required]
-        public string Value2 { get; set; }
-    }
+public class TestModel
+{
+    [Required]
+    public string? Value1 { get; set; }
+
+    [Required]
+    public string? Value2 { get; set; }
 }

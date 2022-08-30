@@ -42,7 +42,7 @@ Adds support for using DataAnnotations.
 To use DataAnnotations configure the provider when registering the facility:
 ```
 services.AddAppCore()
-        .AddModelValidation(v => v.UseDataAnnotations());
+        .AddModelValidation(v => v.AddDataAnnotations());
 ```
 
 ### FluentValidation
@@ -51,7 +51,7 @@ Adds support for using FluentValidation.
 To use FluentValidation, configure the provider and add validators when registering the facility:
 ```
 services.AddAppCore()
-        .AddModelValidation(v => v.UseFluentValidation(fv => fv.WithValidator<MyValidator>()));
+        .AddModelValidation(v => v.AddFluentValidation(fv => fv.AddValidator<MyValidator>())));
 ```
 
 ## Contributing
