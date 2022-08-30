@@ -5,7 +5,7 @@ using System.ComponentModel;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection
 {
     /// <summary>
     /// Model validation builder.

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AppCore.DependencyInjection.AssemblyExtensions" Version="$(AppCore_DI_Version)" />
+    <PackageReference Include="AppCore.Extensions.DependencyInjection.AssemblyExtensions" Version="$(AppCore_Extensions_Version)" />
   </ItemGroup>
 
 </Project>

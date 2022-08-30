@@ -13,11 +13,11 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'!='net461'">
+  <ItemGroup Condition="'$(TargetFramework)'!='net462'">
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
 

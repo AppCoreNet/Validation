@@ -4,7 +4,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection
 {
     internal sealed class ModelValidationBuilder : IModelValidationBuilder
     {

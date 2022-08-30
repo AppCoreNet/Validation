@@ -2,7 +2,7 @@
 // Copyright (c) 2018-2020 the AppCore .NET project.
 
 using System.Collections.Generic;
-using AppCore.DependencyInjection;
+using AppCore.Extensions.DependencyInjection;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -22,8 +22,7 @@ namespace AppCore.ModelValidation.DataAnnotations
         {
             var services = new ServiceCollection();
             services.AddAppCore()
-                    .AddModelValidation()
-                    .AddDataAnnotations();
+                    .AddModelValidation(v => v.AddDataAnnotations());
 
             services.Should()
                     .Contain(

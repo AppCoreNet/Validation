@@ -2,7 +2,7 @@
 // Copyright (c) 2018-2021 the AppCore .NET project.
 
 using System.Collections.Generic;
-using AppCore.DependencyInjection;
+using AppCore.Extensions.DependencyInjection;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -24,8 +24,7 @@ namespace AppCore.ModelValidation.FluentValidation
             var services = new ServiceCollection();
 
             services.AddAppCore()
-                    .AddModelValidation()
-                    .AddFluentValidation();
+                    .AddModelValidation(v => v.AddFluentValidation());
 
             services.Should()
                     .Contain(
@@ -41,10 +40,12 @@ namespace AppCore.ModelValidation.FluentValidation
             var services = new ServiceCollection();
 
             services.AddAppCore()
-                    .AddModelValidation()
-                    .AddFluentValidation(
-                        f => f
-                            .AddValidator<TestModelValidator>());
+                    .AddModelValidation(
+                        v =>
+                        {
+                            v.AddFluentValidation()
+                             .AddValidator<TestModelValidator>();
+                        });
 
             services.Should()
                     .Contain(
@@ -59,16 +60,17 @@ namespace AppCore.ModelValidation.FluentValidation
             var services = new ServiceCollection();
 
             services.AddAppCore()
-                    .AddModelValidation()
-                    .AddFluentValidation(
-                        f => f
-                            .AddValidatorsFrom(
-                                s => s.Assemblies(
-                                    a => a
-                                         .ClearDefaultFilters()
-                                         .Add(typeof(TestModelValidator).Assembly))
-                            )
-                    );
+                    .AddModelValidation(
+                        v =>
+                        {
+                            v.AddFluentValidation()
+                             .AddValidatorsFrom(
+                                 s => s.Assemblies(
+                                     a => a
+                                          .ClearDefaultFilters()
+                                          .Add(typeof(TestModelValidator).Assembly))
+                             );
+                        });
 
             services.Should()
                     .Contain(

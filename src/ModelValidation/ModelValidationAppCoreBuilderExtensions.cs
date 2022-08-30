@@ -8,19 +8,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace AppCore.DependencyInjection
+namespace AppCore.Extensions.DependencyInjection
 {
     /// <summary>
     /// Provides extension methods to register model validation.
     /// </summary>
-    public static class AppCoreBuilderExtensions
+    public static class ModelValidationAppCoreBuilderExtensions
     {
         /// <summary>
         /// Adds the model validation services to the <see cref="IServiceCollection"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IAppCoreBuilder"/>.</param>
-        /// <returns>The <see cref="IModelValidationBuilder"/>.</returns>
-        public static IModelValidationBuilder AddModelValidation(this IAppCoreBuilder builder)
+        /// <param name="configure">Delegate to configure the <see cref="IModelValidationBuilder"/>.</param>
+        /// <returns>The <see cref="IAppCoreBuilder"/>.</returns>
+        public static IAppCoreBuilder AddModelValidation(this IAppCoreBuilder builder, Action<IModelValidationBuilder>? configure = null)
         {
             Ensure.Arg.NotNull(builder);
 
@@ -28,7 +29,9 @@ namespace AppCore.DependencyInjection
             services.TryAddTransient<IValidatorFactory, ValidatorFactory>();
             services.TryAddTransient(typeof(IValidator<>), typeof(Validator<>));
 
-            return new ModelValidationBuilder(services);
+            configure?.Invoke(new ModelValidationBuilder(services));
+
+            return builder;
         }
     }
 }
